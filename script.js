@@ -16,7 +16,7 @@ fetch('profile.json')
         $('tagline').textContent = p.tagline || '';
         $('bio').textContent = p.bio || '';
 
-        // Status text
+        // Status pill
         if (p.status && $('status-text')) {
             $('status-text').textContent = p.status;
         }
@@ -50,7 +50,7 @@ fetch('profile.json')
                             <p class="project-desc">${esc(x.desc)}</p>
                             ${tags ? `<div class="project-tags">${tags}</div>` : ''}
                             <a href="${safe(x.link)}" target="_blank" rel="noopener" class="project-link">
-                                <span>View Repository</span>
+                                <span>Explore Project</span>
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="7" y1="17" x2="17" y2="7"></line>
                                     <polyline points="7 7 17 7 17 17"></polyline>
@@ -77,19 +77,23 @@ fetch('profile.json')
             $('skills').innerHTML = (p.skills || []).map((s) => `<li>${esc(s)}</li>`).join('');
         }
 
-        // Contact & Social Links
+        // Connect & Social Links
         if ($('links')) {
-            const rawEmail = p.email || 'jobinmjbzkj97@gmail.com';
+            const rawEmail = p.email || 'jobinmjohn4@gmail.com';
             const linksEntries = Object.entries(p.links || {});
-            $('links').innerHTML = linksEntries.map(([k, v]) => `
-                <a href="${safe(v)}" target="_blank" rel="noopener" class="btn btn-secondary">
-                    <span>${esc(k.charAt(0).toUpperCase() + k.slice(1))}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                        <polyline points="7 7 17 7 17 17"></polyline>
-                    </svg>
-                </a>
-            `).join('');
+            
+            $('links').innerHTML = linksEntries.map(([k, v]) => {
+                const label = k.charAt(0).toUpperCase() + k.slice(1);
+                return `
+                    <a href="${safe(v)}" target="_blank" rel="noopener" class="btn btn-secondary">
+                        <span>${esc(label)}</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
+                `;
+            }).join('');
 
             // Hook up Email Copy button
             const copyBtn = $('copy-email-btn');
