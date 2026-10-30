@@ -3,26 +3,48 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g,
     (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const safe = (u) => (/^(https?:\/\/|mailto:)/i.test(u) ? u : '#');
 
+// Initialize spotlight mouse tracker immediately
+setupSpotlightTracker();
+
+// Hook up Email Copy button immediately
+const copyBtn = $('copy-email-btn');
+const toast = $('copy-toast');
+if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+        const emailToCopy = 'jobinmjohn4@gmail.com';
+        try {
+            await navigator.clipboard.writeText(emailToCopy);
+            if (toast) {
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2500);
+            }
+        } catch {
+            window.location.href = `mailto:${emailToCopy}`;
+        }
+    });
+}
+
+// Fetch and hydrate from profile.json (if running on a server or GitHub Pages)
 fetch('profile.json')
     .then((r) => {
         if (!r.ok) throw new Error(`HTTP error! status: ${r.status}`);
         return r.json();
     })
     .then((p) => {
-        // Dynamic title & base fields
-        document.title = `${p.name} | Portfolio`;
-        $('name').textContent = p.name || 'Jobin M John';
-        if ($('role')) $('role').textContent = p.role || '';
-        $('tagline').textContent = p.tagline || '';
-        $('bio').textContent = p.bio || '';
-
-        // Status pill
-        if (p.status && $('status-text')) {
-            $('status-text').textContent = p.status;
+        if (!p) return;
+        
+        // Update document title and core headers
+        if (p.name) {
+            document.title = `${p.name} | Portfolio`;
+            if ($('name')) $('name').textContent = p.name;
         }
+        if (p.role && $('role')) $('role').textContent = p.role;
+        if (p.tagline && $('tagline')) $('tagline').textContent = p.tagline;
+        if (p.bio && $('bio')) $('bio').textContent = p.bio;
+        if (p.status && $('status-text')) $('status-text').textContent = p.status;
 
-        // Stats Strip
-        if ($('stats-strip') && Array.isArray(p.stats)) {
+        // Hydrate Stats
+        if ($('stats-strip') && Array.isArray(p.stats) && p.stats.length > 0) {
             $('stats-strip').innerHTML = p.stats.map((s) => `
                 <div class="stat-item">
                     <span class="stat-value">${esc(s.value)}</span>
@@ -31,9 +53,9 @@ fetch('profile.json')
             `).join('');
         }
 
-        // Projects Section (Spotlight Cards)
-        if ($('projects')) {
-            $('projects').innerHTML = (p.projects || []).map((x) => {
+        // Hydrate Projects
+        if ($('projects') && Array.isArray(p.projects) && p.projects.length > 0) {
+            $('projects').innerHTML = p.projects.map((x) => {
                 const tags = Array.isArray(x.tech)
                     ? x.tech.map((t) => `<span class="tech-tag">${esc(t)}</span>`).join('')
                     : '';
@@ -62,8 +84,8 @@ fetch('profile.json')
             }).join('');
         }
 
-        // Categorized Skills
-        if ($('skills-container') && p.skillsCategorized) {
+        // Hydrate Categorized Skills
+        if ($('skills-container') && p.skillsCategorized && Object.keys(p.skillsCategorized).length > 0) {
             $('skills-container').innerHTML = Object.entries(p.skillsCategorized).map(([category, items]) => `
                 <div class="skill-category-card">
                     <div class="skill-cat-title">${esc(category)}</div>
@@ -72,16 +94,11 @@ fetch('profile.json')
                     </ul>
                 </div>
             `).join('');
-        } else if ($('skills')) {
-            $('skills').style.display = 'flex';
-            $('skills').innerHTML = (p.skills || []).map((s) => `<li>${esc(s)}</li>`).join('');
         }
 
-        // Connect & Social Links
-        if ($('links')) {
-            const rawEmail = p.email || 'jobinmjohn4@gmail.com';
-            const linksEntries = Object.entries(p.links || {});
-            
+        // Hydrate Links
+        if ($('links') && p.links && Object.keys(p.links).length > 0) {
+            const linksEntries = Object.entries(p.links);
             $('links').innerHTML = linksEntries.map(([k, v]) => {
                 const label = k.charAt(0).toUpperCase() + k.slice(1);
                 return `
@@ -94,38 +111,11 @@ fetch('profile.json')
                     </a>
                 `;
             }).join('');
-
-            // Hook up Email Copy button
-            const copyBtn = $('copy-email-btn');
-            const toast = $('copy-toast');
-            if (copyBtn) {
-                copyBtn.addEventListener('click', async () => {
-                    try {
-                        await navigator.clipboard.writeText(rawEmail);
-                        if (toast) {
-                            toast.classList.add('show');
-                            setTimeout(() => toast.classList.remove('show'), 2500);
-                        }
-                    } catch {
-                        window.location.href = `mailto:${rawEmail}`;
-                    }
-                });
-            }
         }
-
-        // Footer
-        if ($('footer')) {
-            $('footer').innerHTML = `
-                <div>&copy; ${new Date().getFullYear()} ${esc(p.name)}. Built for FOSSSoC-S1 Portfolio Week.</div>
-                <div style="margin-top: 6px; font-size: 0.75rem; color: var(--subtle);">Deployed statically via GitHub Pages</div>
-            `;
-        }
-
-        // Initialize Spotlight card mouse tracker
-        setupSpotlightTracker();
     })
     .catch((err) => {
-        console.error('Error loading profile data:', err);
+        // If opened locally via file://, pre-rendered semantic HTML remains fully visible
+        console.log('Static pre-rendered HTML active. Profile hydration skipped (likely local file:// protocol):', err.message);
     });
 
 // Smooth 60fps Spotlight Border Hover Tracker
@@ -135,7 +125,6 @@ function setupSpotlightTracker() {
         for (let i = 0; i < cards.length; i++) {
             const card = cards[i];
             const rect = card.getBoundingClientRect();
-            // Only calculate if visible in viewport
             if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
