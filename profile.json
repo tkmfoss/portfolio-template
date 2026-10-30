@@ -1,19 +1,68 @@
 {
-    "name": "Your Name",
-    "tagline": "Your one-line introduction",
-    "bio": "Write 2 or 3 sentences about yourself.",
-    "skills": [
-        "Git",
-        "HTML"
+    "name": "Jobin M John",
+    "role": "Full-Stack Developer & CSE Undergraduate",
+    "tagline": "Building scalable web apps, creative interfaces, and open-source tooling.",
+    "bio": "3rd-year Computer Science & Engineering undergraduate at TKM College of Engineering, Kollam. Passionate about modern web architecture, interactive user experiences, and exploring distributed software systems.",
+    "status": "Available for projects & open-source collaborations",
+    "location": "Kollam, Kerala, India",
+    "email": "jobinmjbzkj97@gmail.com",
+    "stats": [
+        { "value": "Year 3", "label": "B.Tech CSE @ TKMCE" },
+        { "value": "8+", "label": "Public Projects" },
+        { "value": "100%", "label": "Open Source Passion" }
     ],
+    "skills": [
+        "JavaScript",
+        "TypeScript",
+        "Python",
+        "Java",
+        "React",
+        "Tailwind CSS",
+        "Node.js",
+        "Flask",
+        "Git & GitHub",
+        "Linux",
+        "REST APIs",
+        "HTML5 / CSS3"
+    ],
+    "skillsCategorized": {
+        "Languages": ["JavaScript (ES6+)", "TypeScript", "Python", "Java", "C", "HTML5 & CSS3"],
+        "Frontend & UI": ["React", "Tailwind CSS", "Modern Web APIs", "Responsive Design", "UI/UX Micro-Interactions"],
+        "Backend & Systems": ["Node.js", "Express", "Python Flask", "RESTful Architecture"],
+        "Developer Tooling": ["Git & GitHub Workflow", "Linux / Bash", "VS Code", "GitHub Pages & CI/CD"]
+    },
     "projects": [
         {
-            "title": "My first project",
-            "desc": "What it does.",
-            "link": "https://github.com/yourname"
+            "title": "WildBond",
+            "category": "Creative Web Application",
+            "desc": "A creative web platform reimagining modern social and matchmaking experiences for a forest ecosystem, combining playful interaction design with bespoke logic.",
+            "tech": ["JavaScript", "HTML5", "CSS3", "UI/UX Design"],
+            "link": "https://github.com/jobmj/WildBond"
+        },
+        {
+            "title": "AQI Risk Assessment System",
+            "category": "Full-Stack & Environmental Analytics",
+            "desc": "Air Quality Index (AQI) monitoring and risk evaluation system featuring modular backend processing and Python Flask integration.",
+            "tech": ["Python", "Flask", "Java", "Data Processing", "REST API"],
+            "link": "https://github.com/jobmj/AQI-Risk-Assessment-deployable-repo-"
+        },
+        {
+            "title": "CHAOS-IDE",
+            "category": "Developer Tooling",
+            "desc": "A browser-based interactive developer environment and code editor engineered for rapid experimentation and modular code execution.",
+            "tech": ["JavaScript", "DOM Architecture", "Web APIs"],
+            "link": "https://github.com/jobmj/CHAOS-IDE"
+        },
+        {
+            "title": "Flappy-Dragon",
+            "category": "Interactive Arcade Game",
+            "desc": "Browser-based arcade game implementing physics collision detection, smooth frame loops, and responsive viewport canvas rendering.",
+            "tech": ["JavaScript", "Canvas API", "Game Engine Logic"],
+            "link": "https://github.com/jobmj/Flappy-Dragon"
         }
     ],
     "links": {
-        "github": "https://github.com/yourname"
+        "github": "https://github.com/jobmj",
+        "email": "mailto:jobinmjbzkj97@gmail.com"
     }
 }
