@@ -275,15 +275,16 @@ function setupSpotlightTracker() {
     });
 }
 
-// Phosphor Tactile Click Ripple Physics
+// Phosphor Tactile Click Shockwave Physics
 function setupClickRipple() {
-    window.addEventListener('click', (e) => {
+    window.addEventListener('pointerdown', (e) => {
+        // Create phosphor laser ripple at touch / click coordinate
         const ripple = document.createElement('div');
         ripple.className = 'click-ripple';
         ripple.style.left = `${e.clientX}px`;
         ripple.style.top = `${e.clientY}px`;
         document.body.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 450);
+        setTimeout(() => ripple.remove(), 550);
     });
 }
 
