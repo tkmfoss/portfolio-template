@@ -29,6 +29,9 @@
     --radius-lg: 24px;
     --radius-pill: 9999px;
     --snappy-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    /* Dynamic Island Spring Physics: organic overshoot pop-up & clean spring retraction */
+    --spring-pop: cubic-bezier(0.34, 1.45, 0.7, 1);
+    --spring-return: cubic-bezier(0.22, 1, 0.36, 1);
     --transition: all 0.24s var(--snappy-ease);
 }
 
@@ -363,26 +366,16 @@ h2 {
     color: var(--accent);
 }
 
-/* About Box */
-.about-card {
-    background: var(--card);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 0 24px rgba(255, 255, 255, 0.015), 0 12px 32px rgba(0, 0, 0, 0.35);
-    border-radius: var(--radius-md);
-    padding: 28px 32px;
-    color: var(--muted);
-    font-size: 1.05rem;
-    line-height: 1.75;
-}
-
 /* =============================================================
    1. STRUCTURAL & SURFACE DETAILS (Glassmorphism & Depth)
-   2. MICRO-INTERACTIONS & HOVER PHYSICS
+   2. DYNAMIC ISLAND POP-UP & 3D TILT ENGINE FOR ALL CARDS
    ============================================================= */
 
-.spotlight-card {
+.spotlight-card,
+.about-card,
+.skill-category-card,
+.contact-card,
+.stats-strip {
     position: relative;
     background: var(--card);
     backdrop-filter: blur(18px);
@@ -396,37 +389,50 @@ h2 {
         inset 1px 0 0 rgba(255, 255, 255, 0.04),
         inset 0 0 24px rgba(255, 255, 255, 0.012),
         0 12px 32px -4px rgba(0, 0, 0, 0.45);
-    /* 3D tilt perspective & snappy elevation lift */
+    /* Dynamic Island 3D tilt perspective & spring return physics */
     transform-style: preserve-3d;
-    will-change: transform;
+    will-change: transform, box-shadow, border-color;
     transition: 
-        transform 0.18s ease-out, 
-        box-shadow 0.28s var(--snappy-ease), 
-        border-color 0.28s var(--snappy-ease),
-        background-color 0.28s var(--snappy-ease);
+        transform 0.38s var(--spring-return), 
+        box-shadow 0.38s var(--spring-return), 
+        border-color 0.28s ease,
+        background-color 0.28s ease;
 }
 
-/* Snappy Elevation Lift (-6px) & Directional Accent Glow beneath card */
-.spotlight-card:hover {
-    transform: translateY(-6px);
+/* Dynamic Island Pop-Up & Diffused Directional Accent Glow on Hover */
+.spotlight-card:hover,
+.about-card:hover,
+.skill-category-card:hover,
+.contact-card:hover,
+.stats-strip:hover {
+    z-index: 15;
     background-color: var(--card-hover);
     border-color: var(--border-accent);
     box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.22),
-        inset 0 0 20px rgba(99, 102, 241, 0.05),
-        0 24px 48px -12px rgba(99, 102, 241, 0.32),
-        0 0 0 1px rgba(99, 102, 241, 0.3);
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        inset 0 0 20px rgba(99, 102, 241, 0.06),
+        0 26px 52px -10px rgba(0, 0, 0, 0.7),
+        0 0 32px -4px rgba(99, 102, 241, 0.35);
+    transition: 
+        transform 0.42s var(--spring-pop), 
+        box-shadow 0.42s var(--spring-pop), 
+        border-color 0.28s ease,
+        background-color 0.28s ease;
 }
 
-/* Dynamic Radial Mouse Spotlight */
-.spotlight-card::before {
+/* Dynamic Radial Mouse Spotlight across ALL cards */
+.spotlight-card::before,
+.about-card::before,
+.skill-category-card::before,
+.contact-card::before,
+.stats-strip::before {
     content: '';
     position: absolute;
     top: var(--mouse-y, -200px);
     left: var(--mouse-x, -200px);
-    width: 360px;
-    height: 360px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 70%);
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.16), transparent 70%);
     transform: translate(-50%, -50%);
     pointer-events: none;
     opacity: 0;
@@ -434,8 +440,28 @@ h2 {
     z-index: 1;
 }
 
-.spotlight-card:hover::before {
+.spotlight-card:hover::before,
+.about-card:hover::before,
+.skill-category-card:hover::before,
+.contact-card:hover::before,
+.stats-strip:hover::before {
     opacity: 1;
+}
+
+/* About Box Specifics */
+.about-card {
+    padding: 28px 32px;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.about-card > *,
+.skill-category-card > *,
+.contact-card > *,
+.stats-strip > * {
+    position: relative;
+    z-index: 2;
 }
 
 .card-inner {
@@ -768,20 +794,7 @@ h2 {
 }
 
 .skill-category-card {
-    background: var(--card);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.35);
-    border-radius: var(--radius-md);
     padding: 22px;
-    transition: var(--transition);
-}
-
-.skill-category-card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-3px);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 16px 32px rgba(0, 0, 0, 0.45);
 }
 
 .skill-cat-title {
@@ -822,16 +835,8 @@ h2 {
 
 /* Links & Connect Section */
 .contact-card {
-    background: var(--card);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 0 30px rgba(99, 102, 241, 0.03), 0 16px 40px rgba(0, 0, 0, 0.4);
-    border-radius: var(--radius-lg);
     padding: 40px 32px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
 }
 
 .contact-card h3 {

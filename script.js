@@ -205,9 +205,11 @@ fetch('profile.json')
         console.log('Static pre-rendered HTML active. Profile hydration skipped (likely local file:// protocol):', err.message);
     });
 
-// Smooth 60fps 3D Interactive Card Tilt & Radial Spotlight Physics
+// Smooth 60fps 3D Interactive Card Tilt & Dynamic Island Pop-Up Physics across ALL cards
 function setupSpotlightTracker() {
-    const cards = document.querySelectorAll('.spotlight-card');
+    const cards = document.querySelectorAll(
+        '.spotlight-card, .about-card, .skill-category-card, .contact-card, .stats-strip'
+    );
     
     cards.forEach((card) => {
         // Prevent stacking listeners
@@ -223,17 +225,17 @@ function setupSpotlightTracker() {
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
 
-            // 3D Tilt calculation (subtle, physical tilt up to 6 degrees)
+            // 3D Tilt calculation & Dynamic Island Spring Pop
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -6;
-            const rotateY = ((x - centerX) / centerX) * 6;
+            const rotateX = ((y - centerY) / centerY) * -5;
+            const rotateY = ((x - centerX) / centerX) * 5;
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-6px) scale3d(1.01, 1.01, 1.01)`;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-6px) scale3d(1.02, 1.02, 1.02)`;
         });
 
         card.addEventListener('mouseleave', () => {
-            // Smoothly reset 3D transform and reset spotlight position
+            // Smoothly retract with spring physics (Dynamic Island pop-out)
             card.style.transform = '';
             card.style.setProperty('--mouse-x', '-200px');
             card.style.setProperty('--mouse-y', '-200px');
