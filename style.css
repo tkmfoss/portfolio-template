@@ -1299,6 +1299,109 @@ h2 {
     }
 }
 
+/* =============================================================
+   MAGICAL PURPLE MOUSE TRAIL & SPARKLE GLITTER BURST
+   ============================================================= */
+
+/* Magical Purple Mouse Trail Particle */
+.magic-trail-dot {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 99998;
+    transform: translate(-50%, -50%) scale(1);
+    background: radial-gradient(circle, #c084fc 0%, #8b5cf6 60%, transparent 100%);
+    box-shadow: 0 0 10px #a855f7, 0 0 16px rgba(168, 85, 247, 0.45);
+    animation: magicTrailFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity;
+}
+
+.magic-trail-star {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%) scale(1);
+    font-size: 11px;
+    line-height: 1;
+    color: #d8b4fe;
+    text-shadow: 0 0 8px #a855f7, 0 0 14px #c084fc;
+    animation: magicStarFade 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes magicTrailFade {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.95;
+    }
+    100% {
+        transform: translate(-50%, calc(-50% + 14px)) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes magicStarFade {
+    0% {
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, calc(-50% + 6px)) scale(1.1) rotate(45deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translate(-50%, calc(-50% + 18px)) scale(0.2) rotate(90deg);
+        opacity: 0;
+    }
+}
+
+/* Click Sparkle Fading Glitter Particle */
+.glitter-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--glitter-size, 12px);
+    color: var(--glitter-color, #c084fc);
+    text-shadow: 0 0 8px var(--glitter-color, #a855f7), 0 0 16px rgba(255, 255, 255, 0.8);
+    animation: glitterExplosion var(--glitter-duration, 0.75s) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity;
+}
+
+.glitter-dot {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    border-radius: 50%;
+    width: var(--dot-size, 6px);
+    height: var(--dot-size, 6px);
+    background: var(--glitter-color, #c084fc);
+    box-shadow: 0 0 10px var(--glitter-color, #a855f7), 0 0 18px rgba(255, 255, 255, 0.6);
+    animation: glitterExplosion var(--glitter-duration, 0.75s) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes glitterExplosion {
+    0% {
+        transform: translate(-50%, -50%) translate(0, 0) scale(0.3) rotate(0deg);
+        opacity: 1;
+    }
+    40% {
+        transform: translate(-50%, -50%) translate(calc(var(--gx) * 0.7), calc(var(--gy) * 0.7)) scale(1.3) rotate(calc(var(--grot) * 0.5));
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) translate(var(--gx), calc(var(--gy) + 16px)) scale(0.1) rotate(var(--grot));
+        opacity: 0;
+    }
+}
+
 /* Button Tactile Click Compression & Glow Shockwave */
 .btn:active,
 .ghost-btn-link:active,

@@ -7,6 +7,7 @@ const safe = (u) => (/^(https?:\/\/|mailto:)/i.test(u) ? u : '#');
 setupSpotlightTracker();
 setupModalController();
 setupClickRipple();
+setupMagicalTrail();
 setupScrollTransitions();
 
 // Hook up Email Copy button immediately
@@ -275,17 +276,105 @@ function setupSpotlightTracker() {
     });
 }
 
-// Phosphor Tactile Click Shockwave Physics
+// Phosphor Tactile Click Shockwave & Sparkle Fading Glitter Explosion Physics
 function setupClickRipple() {
+    const glitterColors = [
+        '#c084fc', // Bright Lavender Violet
+        '#a855f7', // Electric Purple
+        '#e879f9', // Neon Fuchsia / Pink Purple
+        '#ffffff', // Diamond Sparkle White
+        '#34d399', // Emerald Starlight
+        '#d8b4fe'  // Soft Lilac Glow
+    ];
+
+    const starGlyphs = ['✦', '★', '✧', '⋆', '✷'];
+
     window.addEventListener('pointerdown', (e) => {
-        // Create phosphor laser ripple at touch / click coordinate
+        // 1. Dual-layer laser shockwave ring
         const ripple = document.createElement('div');
         ripple.className = 'click-ripple';
         ripple.style.left = `${e.clientX}px`;
         ripple.style.top = `${e.clientY}px`;
         document.body.appendChild(ripple);
         setTimeout(() => ripple.remove(), 550);
+
+        // 2. Sparkle Fading Glitter Burst (10 to 14 radiating particles)
+        const particleCount = Math.floor(Math.random() * 5) + 10;
+
+        for (let i = 0; i < particleCount; i++) {
+            const angle = (Math.PI * 2 * i) / particleCount + ((Math.random() - 0.5) * 0.4);
+            const distance = Math.floor(Math.random() * 55) + 30; // 30px to 85px outward
+            const gx = Math.cos(angle) * distance;
+            const gy = Math.sin(angle) * distance;
+            const rot = (Math.random() - 0.5) * 360;
+            const color = glitterColors[Math.floor(Math.random() * glitterColors.length)];
+            const duration = (Math.random() * 0.25 + 0.6).toFixed(2); // 0.6s to 0.85s
+
+            const isStar = Math.random() > 0.4;
+            const p = document.createElement('div');
+
+            if (isStar) {
+                p.className = 'glitter-particle';
+                p.textContent = starGlyphs[Math.floor(Math.random() * starGlyphs.length)];
+                p.style.setProperty('--glitter-size', `${Math.floor(Math.random() * 7) + 10}px`);
+            } else {
+                p.className = 'glitter-dot';
+                p.style.setProperty('--dot-size', `${Math.floor(Math.random() * 5) + 4}px`);
+            }
+
+            p.style.left = `${e.clientX}px`;
+            p.style.top = `${e.clientY}px`;
+            p.style.setProperty('--gx', `${gx}px`);
+            p.style.setProperty('--gy', `${gy}px`);
+            p.style.setProperty('--grot', `${rot}deg`);
+            p.style.setProperty('--glitter-color', color);
+            p.style.setProperty('--glitter-duration', `${duration}s`);
+
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), parseFloat(duration) * 1000 + 50);
+        }
     });
+}
+
+// Magical Purple Mouse Trail
+function setupMagicalTrail() {
+    let lastX = -100;
+    let lastY = -100;
+    let trailCount = 0;
+    let lastTime = 0;
+
+    window.addEventListener('pointermove', (e) => {
+        const now = performance.now();
+        // Throttle to at most once per 22ms and min distance 9px for 60-120fps lock
+        const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+        if (now - lastTime < 22 || dist < 9) return;
+
+        lastX = e.clientX;
+        lastY = e.clientY;
+        lastTime = now;
+        trailCount++;
+
+        const isStar = trailCount % 3 === 0;
+        const trail = document.createElement('div');
+
+        if (isStar) {
+            trail.className = 'magic-trail-star';
+            trail.textContent = trailCount % 6 === 0 ? '✦' : '✧';
+        } else {
+            trail.className = 'magic-trail-dot';
+            const size = Math.floor(Math.random() * 5) + 5; // 5px to 9px
+            trail.style.width = `${size}px`;
+            trail.style.height = `${size}px`;
+        }
+
+        const offsetX = (Math.random() - 0.5) * 6;
+        const offsetY = (Math.random() - 0.5) * 6;
+        trail.style.left = `${e.clientX + offsetX}px`;
+        trail.style.top = `${e.clientY + offsetY}px`;
+
+        document.body.appendChild(trail);
+        setTimeout(() => trail.remove(), 700);
+    }, { passive: true });
 }
 
 // Centered Case Study Modal Controller
