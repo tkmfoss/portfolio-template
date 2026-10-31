@@ -1,27 +1,29 @@
 /* -------------------------------------------------------------
-   Linear / Vercel-inspired Minimalist Engineering Design System
-   High-performance aesthetic optimized for zero-build static hosting
+   Palette 1: "Silicon & Terminal" (Sharpened Cyber Midnight)
+   A high-precision, low-glare aesthetic for GPU compute & edge AI
    ------------------------------------------------------------- */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-    --bg: #09090d;
-    --bg-alt: #0e0f16;
-    /* Layered transparency: ultra-dark slate base with translucent fill */
-    --card: rgba(17, 18, 27, 0.62);
-    --card-hover: rgba(23, 24, 38, 0.85);
-    --border: rgba(255, 255, 255, 0.08);
-    --border-hover: rgba(255, 255, 255, 0.2);
-    --border-accent: rgba(99, 102, 241, 0.45);
-    --fg: #f4f4f7;
-    --muted: #9fa6b5;
-    --subtle: #626879;
-    --accent: #6366f1;
-    --accent-light: #818cf8;
-    --accent-glow: rgba(99, 102, 241, 0.28);
+    --bg: #0a0d14; /* Deep Carbon Navy */
+    --bg-alt: #0e121b;
+    /* Surface: Tinted Glass Slate at 68% opacity with blur */
+    --card: rgba(17, 22, 34, 0.68);
+    --card-hover: rgba(22, 30, 48, 0.90);
+    --border: rgba(255, 255, 255, 0.08); /* Subdued Phosphor */
+    --border-hover: rgba(52, 211, 153, 0.35); /* Signal Emerald Phosphor */
+    --border-accent: rgba(52, 211, 153, 0.45);
+    --fg: #f1f5f9; /* Stark Ice */
+    --muted: #94a3b8; /* Cool Machine Silver */
+    --subtle: #64748b;
+    --accent: #10b981; /* Clean Signal Emerald */
+    --accent-light: #34d399; /* Signal Emerald Bright */
+    --accent-glow: rgba(16, 185, 129, 0.22);
+    --secondary-accent: #6366f1; /* Cobalt Violet */
+    --secondary-glow: rgba(99, 102, 241, 0.20);
     --emerald: #10b981;
-    --emerald-glow: rgba(16, 185, 129, 0.3);
+    --emerald-glow: rgba(16, 185, 129, 0.35);
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
     --radius-sm: 8px;
@@ -274,14 +276,15 @@ main, .hero, footer {
 }
 
 .btn-primary {
-    background: #ffffff;
-    color: #09090b;
+    background: #34d399;
+    color: #0a0d14;
+    font-weight: 600;
 }
 
 .btn-primary:hover {
-    background: #e4e4e7;
+    background: #10b981;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.18);
+    box-shadow: 0 6px 20px rgba(52, 211, 153, 0.35);
 }
 
 .btn-secondary {
@@ -292,10 +295,11 @@ main, .hero, footer {
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(52, 211, 153, 0.08);
     border-color: var(--border-hover);
+    color: #ffffff;
     transform: translateY(-2px);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 8px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Quick Metrics Strip */
@@ -410,9 +414,9 @@ h2 {
     border-color: var(--border-accent);
     box-shadow: 
         inset 0 1px 0 rgba(255, 255, 255, 0.25),
-        inset 0 0 20px rgba(99, 102, 241, 0.06),
-        0 26px 52px -10px rgba(0, 0, 0, 0.7),
-        0 0 32px -4px rgba(99, 102, 241, 0.35);
+        inset 0 0 20px rgba(52, 211, 153, 0.08),
+        0 26px 52px -10px rgba(0, 0, 0, 0.75),
+        0 0 32px -4px rgba(52, 211, 153, 0.32);
     transition: 
         transform 0.42s var(--spring-pop), 
         box-shadow 0.42s var(--spring-pop), 
@@ -432,7 +436,7 @@ h2 {
     left: var(--mouse-x, -200px);
     width: 380px;
     height: 380px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.16), transparent 70%);
+    background: radial-gradient(circle, rgba(52, 211, 153, 0.16), transparent 70%);
     transform: translate(-50%, -50%);
     pointer-events: none;
     opacity: 0;
@@ -659,13 +663,66 @@ h2 {
     line-height: 1.45;
 }
 
+/* Expand hint indicator */
+.expand-prompt {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--subtle);
+    margin-bottom: 12px;
+    transition: color 0.25s ease;
+}
+
+.expand-chevron {
+    transition: transform 0.35s var(--spring-pop);
+}
+
+.spotlight-card:hover .expand-prompt {
+    color: var(--accent-light);
+}
+
+.spotlight-card:hover .expand-chevron {
+    transform: rotate(180deg);
+}
+
+/* Dynamic Island Deep-Dive Architecture Expansion (0fr -> 1fr grid transition) */
+.project-deepdive {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    margin-bottom: 0;
+    transition: 
+        grid-template-rows 0.38s var(--spring-return), 
+        opacity 0.28s ease, 
+        margin-bottom 0.28s ease;
+}
+
+.project-deepdive-inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* Expand smoothly like Dynamic Island on hover or focus-within */
+.spotlight-card:hover .project-deepdive,
+.spotlight-card:focus-within .project-deepdive {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-bottom: 16px;
+    transition: 
+        grid-template-rows 0.44s var(--spring-pop), 
+        opacity 0.35s ease, 
+        margin-bottom 0.35s ease;
+}
+
 /* Deep-dive Architecture & Highlights Box */
 .project-highlight-box {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(10, 13, 20, 0.75);
+    border: 1px solid rgba(52, 211, 153, 0.18);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-sm);
     padding: 12px 14px;
-    margin-bottom: 16px;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -682,12 +739,13 @@ h2 {
 
 .highlight-label {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--fg);
+    font-size: 0.68rem;
+    color: var(--accent-light);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.22);
     padding: 2px 6px;
     border-radius: 4px;
     flex-shrink: 0;
@@ -742,9 +800,9 @@ h2 {
 .tech-tag:hover {
     transform: translateY(-2px);
     color: var(--accent-light);
-    border-color: rgba(99, 102, 241, 0.45);
-    background-color: rgba(99, 102, 241, 0.12);
-    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+    border-color: rgba(52, 211, 153, 0.45);
+    background-color: rgba(16, 185, 129, 0.12);
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
 }
 
 /* =============================================================
@@ -769,11 +827,11 @@ h2 {
     align-self: flex-start;
 }
 
-.ghost-btn-link:hover, .ghost-btn-link:focus-visible {
-    background: rgba(99, 102, 241, 0.15);
-    border-color: rgba(99, 102, 241, 0.5);
+.ghost-btn-link:hover, .ghost-btn-link:focus-within {
+    background: rgba(16, 185, 129, 0.14);
+    border-color: rgba(52, 211, 153, 0.5);
     color: #ffffff;
-    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
     outline: none;
 }
 

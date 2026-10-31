@@ -70,19 +70,27 @@ fetch('profile.json')
                     : '';
                 
                 const highlights = (x.problem || x.architecture) ? `
-                    <div class="project-highlight-box">
-                        ${x.problem ? `
-                            <div class="highlight-item">
-                                <span class="highlight-label">Problem</span>
-                                <span class="highlight-text">${esc(x.problem)}</span>
+                    <div class="expand-prompt">
+                        <span>Hover to reveal architecture & problem</span>
+                        <svg class="expand-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="project-deepdive">
+                        <div class="project-deepdive-inner">
+                            <div class="project-highlight-box">
+                                ${x.problem ? `
+                                    <div class="highlight-item">
+                                        <span class="highlight-label">Problem</span>
+                                        <span class="highlight-text">${esc(x.problem)}</span>
+                                    </div>
+                                ` : ''}
+                                ${x.architecture ? `
+                                    <div class="highlight-item">
+                                        <span class="highlight-label">Architecture</span>
+                                        <span class="highlight-text">${esc(x.architecture)}</span>
+                                    </div>
+                                ` : ''}
                             </div>
-                        ` : ''}
-                        ${x.architecture ? `
-                            <div class="highlight-item">
-                                <span class="highlight-label">Architecture</span>
-                                <span class="highlight-text">${esc(x.architecture)}</span>
-                            </div>
-                        ` : ''}
+                        </div>
                     </div>
                 ` : '';
 
