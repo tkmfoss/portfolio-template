@@ -276,7 +276,7 @@ function setupSpotlightTracker() {
     });
 }
 
-// Phosphor Tactile Click Shockwave & Sparkle Fading Glitter Explosion Physics
+// Sparkle Fading Glitter Explosion Physics (No circle ring)
 function setupClickRipple() {
     const glitterColors = [
         '#c084fc', // Bright Lavender Violet
@@ -290,15 +290,7 @@ function setupClickRipple() {
     const starGlyphs = ['✦', '★', '✧', '⋆', '✷'];
 
     window.addEventListener('pointerdown', (e) => {
-        // 1. Dual-layer laser shockwave ring
-        const ripple = document.createElement('div');
-        ripple.className = 'click-ripple';
-        ripple.style.left = `${e.clientX}px`;
-        ripple.style.top = `${e.clientY}px`;
-        document.body.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 550);
-
-        // 2. Sparkle Fading Glitter Burst (10 to 14 radiating particles)
+        // Sparkle Fading Glitter Burst (10 to 14 radiating particles)
         const particleCount = Math.floor(Math.random() * 5) + 10;
 
         for (let i = 0; i < particleCount; i++) {
@@ -336,45 +328,84 @@ function setupClickRipple() {
     });
 }
 
-// Magical Purple Mouse Trail
+// Continuous Glowing Purple Mouse Trail Canvas
 function setupMagicalTrail() {
-    let lastX = -100;
-    let lastY = -100;
-    let trailCount = 0;
-    let lastTime = 0;
+    const canvas = document.getElementById('mouse-trail-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let dpr = window.devicePixelRatio || 1;
+
+    function resize() {
+        dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    const points = [];
+    const TRAIL_DURATION = 500; // Trail lifetime in milliseconds
 
     window.addEventListener('pointermove', (e) => {
         const now = performance.now();
-        // Throttle to at most once per 22ms and min distance 9px for 60-120fps lock
-        const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-        if (now - lastTime < 22 || dist < 9) return;
+        const last = points[points.length - 1];
+        if (!last || Math.hypot(e.clientX - last.x, e.clientY - last.y) >= 3) {
+            points.push({
+                x: e.clientX,
+                y: e.clientY,
+                time: now
+            });
+        }
+    }, { passive: true });
 
-        lastX = e.clientX;
-        lastY = e.clientY;
-        lastTime = now;
-        trailCount++;
-
-        const isStar = trailCount % 3 === 0;
-        const trail = document.createElement('div');
-
-        if (isStar) {
-            trail.className = 'magic-trail-star';
-            trail.textContent = trailCount % 6 === 0 ? '✦' : '✧';
-        } else {
-            trail.className = 'magic-trail-dot';
-            const size = Math.floor(Math.random() * 5) + 5; // 5px to 9px
-            trail.style.width = `${size}px`;
-            trail.style.height = `${size}px`;
+    function render(now) {
+        // Prune points that have exceeded lifetime
+        while (points.length > 0 && now - points[0].time > TRAIL_DURATION) {
+            points.shift();
         }
 
-        const offsetX = (Math.random() - 0.5) * 6;
-        const offsetY = (Math.random() - 0.5) * 6;
-        trail.style.left = `${e.clientX + offsetX}px`;
-        trail.style.top = `${e.clientY + offsetY}px`;
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-        document.body.appendChild(trail);
-        setTimeout(() => trail.remove(), 700);
-    }, { passive: true });
+        if (points.length >= 2) {
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            for (let i = 0; i < points.length - 1; i++) {
+                const p1 = points[i];
+                const p2 = points[i + 1];
+
+                const age = now - p1.time;
+                const progress = Math.max(0, Math.min(1, age / TRAIL_DURATION));
+                const alpha = Math.pow(1 - progress, 1.3);
+                const baseWidth = (1 - progress) * 3.8 + 0.4;
+
+                // Pass 1: Neon Violet Outer Glow Aura
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.shadowColor = '#a855f7';
+                ctx.shadowBlur = 12 * alpha;
+                ctx.strokeStyle = `rgba(168, 85, 247, ${alpha * 0.75})`;
+                ctx.lineWidth = baseWidth * 1.8;
+                ctx.stroke();
+
+                // Pass 2: Bright Lavender-White Core
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.shadowColor = '#c084fc';
+                ctx.shadowBlur = 4 * alpha;
+                ctx.strokeStyle = `rgba(243, 232, 255, ${alpha * 0.95})`;
+                ctx.lineWidth = baseWidth;
+                ctx.stroke();
+            }
+        }
+
+        requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
 }
 
 // Centered Case Study Modal Controller
