@@ -98,63 +98,84 @@
       </div>
       <div id="projects" class="projects-grid">
         
-        <!-- Project 1: AiQI -->
+        <!-- Project 1: AiQI (Java AQI) -->
         <div class="spotlight-card">
           <div class="card-inner">
-            <!-- Architecture Frame with Image Zoom & Reveal -->
             <div class="project-preview">
               <svg class="preview-graphic-svg" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="400" height="130" fill="#0d0e17"/>
                 <path d="M0 65 Q 100 20, 200 65 T 400 65" stroke="rgba(99,102,241,0.25)" stroke-width="2" fill="none"/>
                 <path d="M0 80 Q 120 120, 240 70 T 400 75" stroke="rgba(16,185,129,0.3)" stroke-width="2" fill="none"/>
-                <!-- Sensor Nodes -->
                 <circle cx="80" cy="52" r="4" fill="#818cf8"/>
                 <circle cx="200" cy="65" r="5" fill="#10b981"/>
                 <circle cx="320" cy="68" r="4" fill="#6366f1"/>
                 <line x1="80" y1="52" x2="200" y2="65" stroke="rgba(255,255,255,0.15)" stroke-dasharray="3 3"/>
                 <line x1="200" y1="65" x2="320" y2="68" stroke="rgba(255,255,255,0.15)" stroke-dasharray="3 3"/>
-                <!-- Metric Badge in Frame -->
-                <rect x="290" y="16" width="94" height="22" rx="4" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)"/>
-                <text x="337" y="31" fill="#818cf8" font-family="JetBrains Mono" font-size="10" text-anchor="middle">ML PIPELINE</text>
+                <rect x="270" y="16" width="116" height="22" rx="4" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)"/>
+                <text x="328" y="31" fill="#818cf8" font-family="JetBrains Mono" font-size="10" text-anchor="middle">3-TIER ML ARCH</text>
               </svg>
             </div>
 
             <div class="project-meta">
               <span class="project-category">
                 <span class="tag-live-dot" aria-hidden="true"></span>
-                <span>ML & Environmental Analytics</span>
+                <span>3-Tier Distributed System · ML & HealthTech</span>
               </span>
             </div>
             
-            <h3 class="project-title">AiQI</h3>
-            <p class="project-desc">Air quality intelligence and risk assessment platform combining machine learning models with a Python Flask backend for real-time pollution metrics and predictive environmental analytics.</p>
+            <h3 class="project-title">AiQI (Java AQI)</h3>
+            <p class="project-tagline">Predictive environmental intelligence bridging raw meteorological data with personalized clinical vulnerability profiles.</p>
+            
+            <!-- Architecture & Highlights -->
+            <div class="project-highlight-box">
+              <div class="highlight-item">
+                <span class="highlight-label">Problem</span>
+                <span class="highlight-text">Standard weather apps present raw, generalized AQI numbers that fail to reflect individual clinical vulnerability (asthma, COPD, age) and lack forward-looking predictive advisories.</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-label">Architecture</span>
+                <span class="highlight-text">JavaFX 21 desktop GUI + Spring Boot 3 core hub (calculating Indian CPCB multi-pollutant sub-indices & Supabase PostgreSQL) + Python Flask microservice serving XGBoost/LightGBM ensembles for next-hour forecast with SHAP diagnostics.</span>
+              </div>
+            </div>
+
+            <p class="project-desc">AI-based real-time air quality risk assessment and personalized clinical health advisory platform. Computes Indian CPCB sub-index formulas across PM2.5, PM10, NO2, O3, CO, and SO2, and generates downloadable multi-page PDF reports via Apache PDFBox.</p>
             
             <div class="project-tags">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Flask</span>
-              <span class="tech-tag">Machine Learning</span>
-              <span class="tech-tag">Data Pipelines</span>
-              <span class="tech-tag">REST API</span>
+              <span class="tech-tag">Java 21</span>
+              <span class="tech-tag">Spring Boot 3</span>
+              <span class="tech-tag">Python Flask</span>
+              <span class="tech-tag">JavaFX 21</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">XGBoost</span>
+              <span class="tech-tag">LightGBM</span>
+              <span class="tech-tag">CPCB Standard</span>
+              <span class="tech-tag">Apache PDFBox</span>
             </div>
             
-            <a href="https://github.com/jobmj/AQI-Risk-Assessment-deployable-repo-" target="_blank" rel="noopener" class="ghost-btn-link">
-              <span>Explore Project</span>
-              <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </a>
+            <div class="project-links-row">
+              <a href="https://github.com/jobmj/AQI-Risk-Assessment-deployable-repo-" target="_blank" rel="noopener" class="ghost-btn-link">
+                <span>GitHub Repository</span>
+                <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+              <a href="https://drive.google.com/file/d/1ZO3AGvXY89lYv9qqPFGj_tmRt7o1uQ4q/view?usp=sharing" target="_blank" rel="noopener" class="ghost-btn-link">
+                <span>Video Demo</span>
+                <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
 
         <!-- Project 2: SignLoop -->
         <div class="spotlight-card">
           <div class="card-inner">
-            <!-- Architecture Frame with Image Zoom & Reveal -->
             <div class="project-preview">
               <svg class="preview-graphic-svg" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="400" height="130" fill="#0d0e17"/>
-                <!-- Landmark Tracking Mesh -->
                 <circle cx="160" cy="65" r="28" stroke="rgba(99,102,241,0.3)" stroke-width="1.5" stroke-dasharray="4 2"/>
                 <circle cx="160" cy="65" r="4" fill="#6366f1"/>
                 <circle cx="145" cy="45" r="3" fill="#818cf8"/>
@@ -165,132 +186,198 @@
                 <line x1="160" y1="65" x2="175" y2="45" stroke="rgba(255,255,255,0.15)"/>
                 <line x1="160" y1="65" x2="135" y2="65" stroke="rgba(255,255,255,0.15)"/>
                 <line x1="160" y1="65" x2="185" y2="65" stroke="rgba(255,255,255,0.15)"/>
-                <!-- Inference Loop Stream -->
                 <path d="M210 65 L270 65 M260 58 L270 65 L260 72" stroke="rgba(16,185,129,0.5)" stroke-width="2"/>
-                <rect x="290" y="16" width="94" height="22" rx="4" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.3)"/>
-                <text x="337" y="31" fill="#34d399" font-family="JetBrains Mono" font-size="10" text-anchor="middle">EDGE INFERENCE</text>
+                <rect x="270" y="16" width="116" height="22" rx="4" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.3)"/>
+                <text x="328" y="31" fill="#34d399" font-family="JetBrains Mono" font-size="10" text-anchor="middle">QUEST 3 VR / 0 GC</text>
               </svg>
             </div>
 
             <div class="project-meta">
               <span class="project-category">
                 <span class="tag-live-dot" aria-hidden="true"></span>
-                <span>TinyML & Computer Vision</span>
+                <span>VR / TinyML & Edge AI · RL · Computer Vision</span>
               </span>
             </div>
             
             <h3 class="project-title">SignLoop</h3>
-            <p class="project-desc">Real-time sign language recognition and feedback loop application powered by lightweight TinyML edge models and low-latency computer vision pipelines.</p>
+            <p class="project-tagline">A 100% offline, bidirectional Indian Sign Language bridge connecting Deaf signers and hearing individuals in virtual reality.</p>
+            
+            <!-- Architecture & Highlights -->
+            <div class="project-highlight-box">
+              <div class="highlight-item">
+                <span class="highlight-label">Problem</span>
+                <span class="highlight-text">Deaf and Hard-of-Hearing individuals face communication barriers in collaborative VR/XR. Existing tools rely on high-latency cloud APIs, single-word fingerspelling, or unidirectional translation.</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-label">Architecture</span>
+                <span class="highlight-text">Sign-to-Speech uses MediaPipe Holistic (225 coords/frame) + 2-layer BiGRU with temporal attention and REINFORCE RL policy (263 AI4Bharat classes) feeding Piper TTS. Speech-to-Sign uses whisper.cpp STT driving a procedural Unity 6.3 avatar (TwoBoneIK & 0 GC ARKit blendshapes).</span>
+              </div>
+            </div>
+
+            <p class="project-desc">Offline two-way Indian Sign Language (ISL) communication system in VR for Meta Quest 3 and PC VR. Re-engineered frame loops in C# without LINQ or dynamic allocations to guarantee consistent 90 FPS on standalone mobile XR chipsets.</p>
             
             <div class="project-tags">
-              <span class="tech-tag">TinyML</span>
-              <span class="tech-tag">Edge AI</span>
-              <span class="tech-tag">Computer Vision</span>
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Real-Time Inference</span>
+              <span class="tech-tag">Unity 6.3 LTS</span>
+              <span class="tech-tag">Meta Quest 3</span>
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">Gymnasium (RL)</span>
+              <span class="tech-tag">BiGRU + Attention</span>
+              <span class="tech-tag">MediaPipe Holistic</span>
+              <span class="tech-tag">whisper.cpp</span>
+              <span class="tech-tag">Piper TTS</span>
             </div>
             
-            <a href="https://github.com/jobmj" target="_blank" rel="noopener" class="ghost-btn-link">
-              <span>Explore Project</span>
-              <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </a>
+            <div class="project-links-row">
+              <a href="https://github.com/mohamedfahadlal/SignLoop-RL-Framework-for-Two-Way-ISL-Communication" target="_blank" rel="noopener" class="ghost-btn-link">
+                <span>SignLoop GitHub</span>
+                <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- Project 3: Chaos-IDE -->
+        <!-- Project 3: WildBond -->
         <div class="spotlight-card">
           <div class="card-inner">
-            <!-- Architecture Frame with Image Zoom & Reveal -->
             <div class="project-preview">
               <svg class="preview-graphic-svg" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="400" height="130" fill="#0d0e17"/>
-                <!-- Code Editor Frame -->
-                <rect x="40" y="22" width="320" height="86" rx="6" fill="#13141f" stroke="rgba(255,255,255,0.08)"/>
-                <circle cx="56" cy="34" r="3" fill="#ef4444"/>
-                <circle cx="68" cy="34" r="3" fill="#eab308"/>
-                <circle cx="80" cy="34" r="3" fill="#10b981"/>
-                <!-- Syntax lines -->
-                <rect x="56" y="50" width="70" height="5" rx="2" fill="#818cf8"/>
-                <rect x="135" y="50" width="90" height="5" rx="2" fill="rgba(255,255,255,0.2)"/>
-                <rect x="70" y="65" width="110" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
-                <rect x="70" y="80" width="80" height="5" rx="2" fill="#34d399"/>
-                <rect x="290" y="16" width="94" height="22" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
-                <text x="337" y="31" fill="#9fa6b5" font-family="JetBrains Mono" font-size="10" text-anchor="middle">WEB RUNTIME</text>
-              </svg>
-            </div>
-
-            <div class="project-meta">
-              <span class="project-category">Developer Tooling & Systems</span>
-            </div>
-            
-            <h3 class="project-title">Chaos-IDE</h3>
-            <p class="project-desc">An interactive, browser-based developer environment engineered for low-latency code execution, syntax parsing, and rapid experimentation.</p>
-            
-            <div class="project-tags">
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">Web APIs</span>
-              <span class="tech-tag">DOM Architecture</span>
-              <span class="tech-tag">Tooling</span>
-            </div>
-            
-            <a href="https://github.com/jobmj/CHAOS-IDE" target="_blank" rel="noopener" class="ghost-btn-link">
-              <span>Explore Project</span>
-              <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Project 4: WildBond -->
-        <div class="spotlight-card">
-          <div class="card-inner">
-            <!-- Architecture Frame with Image Zoom & Reveal -->
-            <div class="project-preview">
-              <svg class="preview-graphic-svg" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="130" fill="#0d0e17"/>
-                <!-- Forest Ecosystem Nodes -->
                 <circle cx="100" cy="65" r="18" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.4)"/>
                 <circle cx="100" cy="65" r="4" fill="#10b981"/>
                 <circle cx="300" cy="65" r="18" fill="rgba(99,102,241,0.12)" stroke="rgba(99,102,241,0.4)"/>
                 <circle cx="300" cy="65" r="4" fill="#6366f1"/>
-                <!-- Matchmaking arc -->
                 <path d="M120 65 C 170 30, 230 30, 280 65" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-dasharray="4 3"/>
                 <circle cx="200" cy="45" r="8" fill="#e8590c" opacity="0.8"/>
-                <rect x="290" y="16" width="94" height="22" rx="4" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.3)"/>
-                <text x="337" y="31" fill="#34d399" font-family="JetBrains Mono" font-size="10" text-anchor="middle">ACTIVE APP</text>
+                <rect x="270" y="16" width="116" height="22" rx="4" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.3)"/>
+                <text x="328" y="31" fill="#34d399" font-family="JetBrains Mono" font-size="10" text-anchor="middle">TROPHIC ENGINE</text>
               </svg>
             </div>
 
             <div class="project-meta">
               <span class="project-category">
                 <span class="tag-live-dot" aria-hidden="true"></span>
-                <span>Full-Stack & Interaction Design</span>
+                <span>Full-Stack Web App · Systems Ecology Simulation</span>
               </span>
             </div>
             
             <h3 class="project-title">WildBond</h3>
-            <p class="project-desc">A creative web platform reimagining modern social experiences for animal species within a forest ecosystem, pairing algorithmic matchmaking with playful interactive systems.</p>
+            <p class="project-tagline">Reimagining social matchmaking through trophic ecological constraints and bio-environmental sustainability.</p>
+            
+            <!-- Architecture & Highlights -->
+            <div class="project-highlight-box">
+              <div class="highlight-item">
+                <span class="highlight-label">Problem</span>
+                <span class="highlight-text">Traditional matchmaking algorithms optimize solely for superficial human preferences, ignoring the foundational mechanics that govern relationships in natural networks: resource availability and ecological balance.</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-label">Architecture</span>
+                <span class="highlight-text">Heuristic ecological algorithm evaluating habitat overlap, trophic conflict, and circadian cycles. Dynamic season simulator modulates caloric scarcity with pack resilience bonuses, yielding an explainable Trophic Stability Score (0–100%).</span>
+              </div>
+            </div>
+
+            <p class="project-desc">Educational systems simulation web application developed by Team Code Crypters (Jobin M John — Team Lead · Full Stack · System Design). Built with React 18, Vite, and Node.js featuring real-time seasonal UI and audio transitions.</p>
             
             <div class="project-tags">
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">HTML5</span>
-              <span class="tech-tag">CSS3</span>
-              <span class="tech-tag">Matchmaking Logic</span>
-              <span class="tech-tag">UI/UX</span>
+              <span class="tech-tag">React 18</span>
+              <span class="tech-tag">Vite</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">Express.js</span>
+              <span class="tech-tag">Web Audio API</span>
+              <span class="tech-tag">Trophic Ecology Engine</span>
+              <span class="tech-tag">Dynamic Seasons</span>
             </div>
             
-            <a href="https://github.com/jobmj/WildBond" target="_blank" rel="noopener" class="ghost-btn-link">
-              <span>Explore Project</span>
-              <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
+            <div class="project-links-row">
+              <a href="https://wild-bond.vercel.app/" target="_blank" rel="noopener" class="ghost-btn-link">
+                <span>Live Deployment</span>
+                <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+              <a href="https://github.com/jobmj/WildBond" target="_blank" rel="noopener" class="ghost-btn-link">
+                <span>GitHub Repository</span>
+                <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+              <a href="https://drive.google.com/file/d/1DjTqdqpy9HTIMQ76RA_7i9So01OrsxDT/view?usp=drive_link" target="_blank" rel="noopener" class="ghost-btn-link">
+                <span>Demo Video</span>
+                <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: Chaos IDE -->
+        <div class="spotlight-card">
+          <div class="card-inner">
+            <div class="project-preview">
+              <svg class="preview-graphic-svg" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="130" fill="#0d0e17"/>
+                <rect x="40" y="22" width="320" height="86" rx="6" fill="#13141f" stroke="rgba(255,255,255,0.08)"/>
+                <circle cx="56" cy="34" r="3" fill="#ef4444"/>
+                <circle cx="68" cy="34" r="3" fill="#eab308"/>
+                <circle cx="80" cy="34" r="3" fill="#10b981"/>
+                <rect x="56" y="50" width="70" height="5" rx="2" fill="#818cf8"/>
+                <rect x="135" y="50" width="90" height="5" rx="2" fill="rgba(255,255,255,0.2)"/>
+                <rect x="70" y="65" width="110" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
+                <rect x="70" y="80" width="80" height="5" rx="2" fill="#34d399"/>
+                <rect x="270" y="16" width="116" height="22" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
+                <text x="328" y="31" fill="#9fa6b5" font-family="JetBrains Mono" font-size="10" text-anchor="middle">PYODIDE WASM</text>
               </svg>
-            </a>
+            </div>
+
+            <div class="project-meta">
+              <span class="project-category">Adversarial Coding Game · TinkerHub Useless Projects 3.0</span>
+            </div>
+            
+            <h3 class="project-title">Chaos IDE</h3>
+            <p class="project-tagline">An adversarial speedrun coding arena where developers race against an unhinged local LLM that actively sabotages their code.</p>
+            
+            <!-- Architecture & Highlights -->
+            <div class="project-highlight-box">
+              <div class="highlight-item">
+                <span class="highlight-label">Problem</span>
+                <span class="highlight-text">Modern developers have grown overly reliant on agreeable autocomplete AI assistants that spoon-feed answers, removing the debugging challenge from programming.</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-label">Architecture</span>
+                <span class="highlight-text">Monaco Editor with timed mutation waves vs Safe Mode countdowns. Powered by a dual-tier sabotage pipeline (quantized Ollama qwen2.5-coder:7b with 1.2s abort timeouts + AST regex fallback) and client-side Pyodide WebAssembly terminal.</span>
+              </div>
+            </div>
+
+            <p class="project-desc">Gamified coding platform built for TinkerHub Useless Projects 3.0 by Team Buggers (Jobin M John, Mohamed Fahad Lal). Features non-blocking in-browser CPython 3.12 WebAssembly test execution and real-time local LLM code sabotage with retro mainframe styling.</p>
+            
+            <div class="project-tags">
+              <span class="tech-tag">Monaco Editor</span>
+              <span class="tech-tag">Pyodide (CPython WASM)</span>
+              <span class="tech-tag">Ollama (qwen2.5-coder:7b)</span>
+              <span class="tech-tag">JavaScript ES6+</span>
+              <span class="tech-tag">Cyberpunk Terminal</span>
+            </div>
+            
+            <div class="project-links-row">
+              <a href="https://github.com/jobmj/useless_project" target="_blank" rel="noopener" class="ghost-btn-link">
+                <span>GitHub Repository</span>
+                <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+              <a href="https://drive.google.com/file/d/1CNEUoQ-jyp_ga1OI7e_WJzQmE7R6-rjJ/view?usp=sharing" target="_blank" rel="noopener" class="ghost-btn-link">
+                <span>Demo Video</span>
+                <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -313,6 +400,7 @@
             <li>Computer Vision</li>
             <li>Real-Time Inference</li>
             <li>Data Pipelines</li>
+            <li>PyTorch</li>
           </ul>
         </div>
         <div class="skill-category-card">
@@ -321,29 +409,33 @@
             <li>Python</li>
             <li>JavaScript (ES6+)</li>
             <li>TypeScript</li>
+            <li>Java 21</li>
             <li>C</li>
-            <li>Java</li>
+            <li>C#</li>
+            <li>SQL</li>
             <li>HTML5 / CSS3</li>
           </ul>
         </div>
         <div class="skill-category-card">
           <div class="skill-cat-title">Full-Stack & Backend</div>
           <ul class="chips">
+            <li>Spring Boot 3</li>
             <li>Node.js</li>
             <li>Express</li>
-            <li>Flask</li>
+            <li>Python Flask</li>
+            <li>PostgreSQL (Supabase)</li>
             <li>RESTful Architecture</li>
-            <li>System Design</li>
           </ul>
         </div>
         <div class="skill-category-card">
-          <div class="skill-cat-title">Frontend & UI</div>
+          <div class="skill-cat-title">Frontend & Spatial</div>
           <ul class="chips">
-            <li>React</li>
+            <li>React 18</li>
+            <li>JavaFX 21</li>
+            <li>Unity 6.3 LTS / OpenXR</li>
             <li>Tailwind CSS</li>
-            <li>Modern Web APIs</li>
-            <li>Responsive UI/UX</li>
-            <li>Micro-Interactions</li>
+            <li>Monaco Editor</li>
+            <li>Pyodide WASM</li>
           </ul>
         </div>
         <div class="skill-category-card">
@@ -352,7 +444,8 @@
             <li>Git & GitHub Workflow</li>
             <li>Linux / Bash</li>
             <li>VS Code</li>
-            <li>GitHub Pages & CI/CD</li>
+            <li>Vercel & GitHub Pages</li>
+            <li>Ollama</li>
           </ul>
         </div>
       </div>

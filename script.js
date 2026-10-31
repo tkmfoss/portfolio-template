@@ -53,7 +53,7 @@ fetch('profile.json')
             `).join('');
         }
 
-        // Hydrate Projects (with architecture previews, live indicators, and ghost CTA buttons)
+        // Hydrate Projects (with architecture previews, live indicators, problem/arch highlights, and multi-CTAs)
         if ($('projects') && Array.isArray(p.projects) && p.projects.length > 0) {
             $('projects').innerHTML = p.projects.map((x) => {
                 const tags = Array.isArray(x.tech)
@@ -65,7 +65,61 @@ fetch('profile.json')
                 const categoryBadge = x.category
                     ? `<span class="project-category">${liveDot}<span>${esc(x.category)}</span></span>`
                     : '';
+                const tagline = x.tagline
+                    ? `<p class="project-tagline">${esc(x.tagline)}</p>`
+                    : '';
                 
+                const highlights = (x.problem || x.architecture) ? `
+                    <div class="project-highlight-box">
+                        ${x.problem ? `
+                            <div class="highlight-item">
+                                <span class="highlight-label">Problem</span>
+                                <span class="highlight-text">${esc(x.problem)}</span>
+                            </div>
+                        ` : ''}
+                        ${x.architecture ? `
+                            <div class="highlight-item">
+                                <span class="highlight-label">Architecture</span>
+                                <span class="highlight-text">${esc(x.architecture)}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                ` : '';
+
+                const actionLinks = [];
+                if (x.liveLink) {
+                    actionLinks.push(`
+                        <a href="${safe(x.liveLink)}" target="_blank" rel="noopener" class="ghost-btn-link">
+                            <span>Live Deployment</span>
+                            <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </a>
+                    `);
+                }
+                if (x.link) {
+                    actionLinks.push(`
+                        <a href="${safe(x.link)}" target="_blank" rel="noopener" class="ghost-btn-link">
+                            <span>GitHub Repository</span>
+                            <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </a>
+                    `);
+                }
+                if (x.demoLink) {
+                    actionLinks.push(`
+                        <a href="${safe(x.demoLink)}" target="_blank" rel="noopener" class="ghost-btn-link">
+                            <span>Video Demo</span>
+                            <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </a>
+                    `);
+                }
+
                 return `
                     <div class="spotlight-card">
                         <div class="card-inner">
@@ -76,23 +130,21 @@ fetch('profile.json')
                                     <circle cx="80" cy="52" r="4" fill="#818cf8"/>
                                     <circle cx="200" cy="65" r="5" fill="#10b981"/>
                                     <circle cx="320" cy="68" r="4" fill="#6366f1"/>
-                                    <rect x="290" y="16" width="94" height="22" rx="4" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)"/>
-                                    <text x="337" y="31" fill="#818cf8" font-family="JetBrains Mono" font-size="10" text-anchor="middle">SYSTEM CORE</text>
+                                    <rect x="270" y="16" width="116" height="22" rx="4" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)"/>
+                                    <text x="328" y="31" fill="#818cf8" font-family="JetBrains Mono" font-size="10" text-anchor="middle">SYSTEM CORE</text>
                                 </svg>
                             </div>
                             <div class="project-meta">
                                 ${categoryBadge}
                             </div>
                             <h3 class="project-title">${esc(x.title)}</h3>
+                            ${tagline}
+                            ${highlights}
                             <p class="project-desc">${esc(x.desc)}</p>
                             ${tags ? `<div class="project-tags">${tags}</div>` : ''}
-                            <a href="${safe(x.link)}" target="_blank" rel="noopener" class="ghost-btn-link">
-                                <span>Explore Project</span>
-                                <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                                    <polyline points="7 7 17 7 17 17"></polyline>
-                                </svg>
-                            </a>
+                            <div class="project-links-row">
+                                ${actionLinks.join('')}
+                            </div>
                         </div>
                     </div>
                 `;

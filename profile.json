@@ -17,53 +17,73 @@
         "Python",
         "JavaScript",
         "TypeScript",
+        "Java",
+        "Spring Boot",
         "React",
         "Tailwind CSS",
         "Node.js",
         "Flask",
+        "PyTorch",
+        "Unity",
         "Git & GitHub",
         "Linux",
         "REST APIs"
     ],
     "skillsCategorized": {
-        "ML & Edge Computing": ["TinyML", "Machine Learning", "Edge AI", "Computer Vision", "Real-Time Inference", "Data Pipelines"],
-        "Languages": ["Python", "JavaScript (ES6+)", "TypeScript", "C", "Java", "HTML5 / CSS3"],
-        "Full-Stack & Backend": ["Node.js", "Express", "Flask", "RESTful Architecture", "System Design"],
-        "Frontend & UI": ["React", "Tailwind CSS", "Modern Web APIs", "Responsive UI/UX", "Micro-Interactions"],
-        "Developer Tooling": ["Git & GitHub Workflow", "Linux / Bash", "VS Code", "GitHub Pages & CI/CD"]
+        "ML & Edge Computing": ["TinyML", "Machine Learning", "Edge AI", "Computer Vision", "Real-Time Inference", "Data Pipelines", "PyTorch"],
+        "Languages": ["Python", "JavaScript (ES6+)", "TypeScript", "Java 21", "C", "C#", "SQL", "HTML5 / CSS3"],
+        "Full-Stack & Backend": ["Spring Boot 3", "Node.js", "Express", "Python Flask", "PostgreSQL (Supabase)", "RESTful Architecture"],
+        "Frontend & Spatial": ["React 18", "JavaFX 21", "Unity 6.3 LTS / OpenXR", "Tailwind CSS", "Monaco Editor", "Pyodide WASM"],
+        "Developer Tooling": ["Git & GitHub Workflow", "Linux / Bash", "VS Code", "Vercel & GitHub Pages", "Ollama"]
     },
     "projects": [
         {
-            "title": "AiQI",
-            "category": "ML & Environmental Analytics",
+            "title": "AiQI (Java AQI)",
+            "tagline": "Predictive environmental intelligence bridging raw meteorological data with personalized clinical vulnerability profiles.",
+            "category": "3-Tier Distributed System · ML & HealthTech",
             "isLive": true,
-            "desc": "Air quality intelligence and risk assessment platform combining machine learning models with a Python Flask backend for real-time pollution metrics and predictive environmental analytics.",
-            "tech": ["Python", "Flask", "Machine Learning", "Data Pipelines", "REST API"],
-            "link": "https://github.com/jobmj/AQI-Risk-Assessment-deployable-repo-"
+            "problem": "Standard weather apps present raw, generalized AQI numbers that ignore individual clinical vulnerability (asthma, COPD, age) and lack forward-looking predictive planning.",
+            "architecture": "3-tier distributed system: JavaFX 21 reactive desktop GUI, Spring Boot 3 core hub with Indian CPCB sub-index formulas & Supabase PostgreSQL, and Python Flask microservice serving XGBoost/LightGBM next-hour forecast ensembles with SHAP diagnostics.",
+            "desc": "AI-based real-time air quality risk assessment and personalized clinical health advisory platform. Computes Indian CPCB multi-pollutant indices, predicts next-hour pollution levels with ML ensembles, and cross-references patient vulnerability markers.",
+            "tech": ["Java 21", "Spring Boot 3", "Python Flask", "JavaFX 21", "PostgreSQL", "XGBoost", "LightGBM", "CPCB Standard", "Apache PDFBox"],
+            "link": "https://github.com/jobmj/AQI-Risk-Assessment-deployable-repo-",
+            "demoLink": "https://drive.google.com/file/d/1ZO3AGvXY89lYv9qqPFGj_tmRt7o1uQ4q/view?usp=sharing"
         },
         {
             "title": "SignLoop",
-            "category": "TinyML & Computer Vision",
+            "tagline": "A 100% offline, bidirectional Indian Sign Language bridge connecting Deaf signers and hearing individuals in virtual reality.",
+            "category": "VR / TinyML & Edge AI · RL · Computer Vision",
             "isLive": true,
-            "desc": "Real-time sign language recognition and feedback loop application powered by lightweight TinyML edge models and low-latency computer vision pipelines.",
-            "tech": ["TinyML", "Edge AI", "Computer Vision", "Python", "Real-Time Inference"],
-            "link": "https://github.com/jobmj"
-        },
-        {
-            "title": "Chaos-IDE",
-            "category": "Developer Tooling & Systems",
-            "isLive": false,
-            "desc": "An interactive, browser-based developer environment engineered for low-latency code execution, syntax parsing, and rapid experimentation.",
-            "tech": ["JavaScript", "Web APIs", "DOM Architecture", "Tooling"],
-            "link": "https://github.com/jobmj/CHAOS-IDE"
+            "problem": "Deaf and Hard-of-Hearing individuals face communication barriers in collaborative VR/XR. Existing tools rely on high-latency cloud APIs, single-word fingerspelling, or one-way translation.",
+            "architecture": "Closed two-way loop: Sign-to-Speech runs MediaPipe Holistic (225 coords/frame) into a 2-layer BiGRU with temporal attention and REINFORCE RL policy (263 AI4Bharat classes) outputting Piper TTS. Speech-to-Sign runs whisper.cpp into a Unity 6.3 avatar with analytical TwoBoneIK and 0-heap-allocation ARKit blendshapes.",
+            "desc": "Offline two-way Indian Sign Language (ISL) communication system in VR for Meta Quest 3. Features real-time landmark sequence encoding, reinforcement learning policy classification, and procedural 3D avatar animation with zero runtime garbage collection.",
+            "tech": ["Unity 6.3 LTS", "Meta Quest 3", "PyTorch", "Gymnasium (RL)", "BiGRU + Attention", "MediaPipe Holistic", "whisper.cpp", "Piper TTS"],
+            "link": "https://github.com/mohamedfahadlal/SignLoop-RL-Framework-for-Two-Way-ISL-Communication"
         },
         {
             "title": "WildBond",
-            "category": "Full-Stack & Interaction Design",
+            "tagline": "Reimagining social matchmaking through trophic ecological constraints and bio-environmental sustainability.",
+            "category": "Full-Stack Web App · Systems Ecology · Interactive UI",
             "isLive": true,
-            "desc": "A creative web platform reimagining modern social experiences for animal species within a forest ecosystem, pairing algorithmic matchmaking with playful interactive systems.",
-            "tech": ["JavaScript", "HTML5", "CSS3", "Matchmaking Logic", "UI/UX"],
-            "link": "https://github.com/jobmj/WildBond"
+            "problem": "Traditional matchmaking algorithms optimize for superficial human metrics, ignoring foundational natural network mechanics: resource availability, coexistence stability, and ecological balance.",
+            "architecture": "Heuristic ecological engine evaluating pairwise interactions across habitat overlap, trophic conflict, and circadian cycles. Dynamic season simulator modulates caloric scarcity with cooperative pack resilience bonuses, yielding an explainable Trophic Stability Score (0–100%).",
+            "desc": "Ecosystem matchmaking and sustainability simulation web application. Replaces opaque black-box scoring with deterministic, explainable multi-variable ecological logic, dynamic seasonal state shifts, and custom sound design.",
+            "tech": ["React 18", "Vite", "Node.js", "Express.js", "Web Audio API", "Trophic Ecology Engine", "Dynamic Seasons"],
+            "link": "https://github.com/jobmj/WildBond",
+            "liveLink": "https://wild-bond.vercel.app/",
+            "demoLink": "https://drive.google.com/file/d/1DjTqdqpy9HTIMQ76RA_7i9So01OrsxDT/view?usp=drive_link"
+        },
+        {
+            "title": "Chaos IDE",
+            "tagline": "An adversarial speedrun coding arena where developers race against an unhinged local LLM that actively sabotages their code.",
+            "category": "Adversarial Coding Game · TinkerHub Useless Projects 3.0",
+            "isLive": false,
+            "problem": "Modern developers have grown overly reliant on agreeable autocomplete AI assistants, diminishing debugging instincts and problem-solving resilience.",
+            "architecture": "Monaco Editor paired with timed mutation phases (AST operators, off-by-one errors) vs Safe Mode countdowns. Powered by a dual-tier sabotage pipeline (quantized local Ollama qwen2.5-coder:7b with 1.2s abort timeouts + AST regex fallback) and client-side Pyodide WebAssembly terminal.",
+            "desc": "Adversarial coding arena built for TinkerHub Useless Projects 3.0. Features non-blocking in-browser CPython 3.12 WebAssembly test execution and real-time local LLM code sabotage with retro mainframe styling.",
+            "tech": ["Monaco Editor", "Pyodide (CPython WASM)", "Ollama (qwen2.5-coder:7b)", "JavaScript ES6+", "Cyberpunk Terminal"],
+            "link": "https://github.com/jobmj/useless_project",
+            "demoLink": "https://drive.google.com/file/d/1CNEUoQ-jyp_ga1OI7e_WJzQmE7R6-rjJ/view?usp=sharing"
         }
     ],
     "links": {
