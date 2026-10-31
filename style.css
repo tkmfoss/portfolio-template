@@ -469,11 +469,6 @@ html.js-scroll-transitions .scroll-section.is-visible .projects-grid > .spotligh
     border: 1px solid rgba(52, 211, 153, 0.35);
     box-shadow: 0 0 12px rgba(52, 211, 153, 0.25);
 }
-    color: #ffffff;
-    background: rgba(52, 211, 153, 0.14);
-    border: 1px solid rgba(52, 211, 153, 0.35);
-    box-shadow: 0 0 12px rgba(52, 211, 153, 0.25);
-}
 
 .section-header {
     display: flex;
@@ -548,10 +543,11 @@ h2 {
         0 26px 52px -10px rgba(0, 0, 0, 0.75),
         0 0 32px -4px rgba(52, 211, 153, 0.32);
     transition: 
-        transform 0.42s var(--spring-pop), 
-        box-shadow 0.42s var(--spring-pop), 
+        transform 0.08s ease-out, 
+        box-shadow 0.38s var(--spring-pop), 
         border-color 0.28s ease,
-        background-color 0.28s ease;
+        background-color 0.28s ease !important;
+    transition-delay: 0s !important;
 }
 
 /* Dynamic Radial Mouse Spotlight across ALL cards */

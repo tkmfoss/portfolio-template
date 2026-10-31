@@ -193,6 +193,8 @@ fetch('profile.json')
                     </ul>
                 </div>
             `).join('');
+
+            setupSpotlightTracker();
         }
 
         // Hydrate Links
@@ -236,16 +238,23 @@ function setupSpotlightTracker() {
 
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -5;
-            const rotateY = ((x - centerX) / centerX) * 5;
+            const rotateX = ((y - centerY) / centerY) * -6;
+            const rotateY = ((x - centerX) / centerX) * 6;
 
+            card.style.transition = 'transform 0.08s ease-out, box-shadow 0.25s ease';
             card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-6px) scale3d(1.02, 1.02, 1.02)`;
         });
 
         card.addEventListener('mouseleave', () => {
+            card.style.transition = 'transform 0.4s var(--spring-return), box-shadow 0.4s var(--spring-return)';
             card.style.transform = '';
             card.style.setProperty('--mouse-x', '-200px');
             card.style.setProperty('--mouse-y', '-200px');
+            setTimeout(() => {
+                if (card.style.transition.includes('0.4s')) {
+                    card.style.transition = '';
+                }
+            }, 400);
         });
 
         // Click on project card pops up modal in the center of the screen
