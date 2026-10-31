@@ -1,24 +1,19 @@
 {
-"name": "Amrin Chris S J",
-"tagline": "B.Tech CSE Student | Exploring Code, Mathematics & Technology",
-"bio": "I am a B.Tech Computer Science and Engineering student at TKM College of Engineering. I enjoy solving mathematical problems, learning programming, and building projects that improve my technical skills.",
-"skills": [
-"C",
-"Java",
-"Python",
-"HTML",
-"CSS",
-"Git",
-"GitHub"
-],
-"projects": [
-{
-"title": "Era Escape: The Lost Timeline",
-"desc": "A Java Swing puzzle game where players explore different historical eras and solve challenges to progress through the timeline.",
-"link": "https://github.com/amrinchrissj/EscapeRoomPuzzle"
-}
-],
-"links": {
-"github": "https://github.com/amrinchrissj"
-}
+    "name": "Your Name",
+    "tagline": "Your one-line introduction",
+    "bio": "Write 2 or 3 sentences about yourself.",
+    "skills": [
+        "Git",
+        "HTML"
+    ],
+    "projects": [
+        {
+            "title": "My first project",
+            "desc": "What it does.",
+            "link": "https://github.com/yourname"
+        }
+    ],
+    "links": {
+        "github": "https://github.com/yourname"
+    }
 }
