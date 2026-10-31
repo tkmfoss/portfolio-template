@@ -1,35 +1,148 @@
-<!doctype html>
-<html lang="en">
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Adithya R B | Portfolio</title>
+  <meta
+    name="description"
+    content="Portfolio of Adithya R B, a Computer Engineering student and aspiring software developer."
+  />
+
+  <link rel="stylesheet" href="./style.css" />
+  <script src="./script.js" defer></script>
 </head>
 
 <body>
-  <header class="hero">
-    <h1 id="name"></h1>
-    <p id="tagline"></p>
-    <nav id="links"></nav>
+  <header class="site-header">
+    <a class="logo" href="#home">AR<span>.</span></a>
+
+    <nav class="navigation">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="header-link" href="#contact">Let's connect ↗</a>
   </header>
+
   <main>
-    <section>
-      <h2>About</h2>
-      <p id="bio"></p>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="eyebrow">
+          <span class="status-dot"></span>
+          COMPUTER ENGINEERING STUDENT
+        </p>
+
+        <h1>
+          Hello, I'm<br />
+          <span id="name">Adithya R B</span><span class="accent">.</span>
+        </h1>
+
+        <h2 id="tagline">Aspiring Software Developer</h2>
+
+        <p class="hero-description" id="hero-description">
+          Exploring ideas, building projects, and learning something new with every line of code.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#projects">
+            Explore my work <span>↗</span>
+          </a>
+
+          <a class="button button-secondary" href="#contact">
+            Get in touch
+          </a>
+        </div>
+
+        <div class="social-links" id="links"></div>
+      </div>
+
+      <div class="hero-art" aria-label="Creative portfolio illustration">
+        <div class="art-circle circle-large"></div>
+        <div class="art-circle circle-small"></div>
+
+        <div class="art-card">
+          <span class="art-card-label">CURRENTLY BUILDING</span>
+          <div class="art-card-title">Era<br />Escape</div>
+          <div class="art-card-bottom">
+            <span>JAVA · PUZZLES · LOGIC</span>
+            <span class="art-arrow">↗</span>
+          </div>
+        </div>
+
+        <div class="art-note">Curiosity<br />into code ✳</div>
+        <div class="art-star">✳</div>
+      </div>
+
+      <div class="hero-bottom">
+        <span>PORTFOLIO / 2026</span>
+        <a href="#about">SCROLL TO EXPLORE ↓</a>
+      </div>
     </section>
-    <section>
-      <h2>Skills</h2>
-      <ul id="skills" class="chips"></ul>
+
+    <section class="section about-section" id="about">
+      <div class="section-heading">
+        <p class="eyebrow">01 / A LITTLE ABOUT ME</p>
+        <h2>Learning today.<br /><span>Building for tomorrow.</span></h2>
+      </div>
+
+      <div class="about-content">
+        <p id="bio">
+          I'm a Computer Engineering student interested in software development,
+          Java, and creating interactive experiences.
+        </p>
+
+        <div class="about-note">
+          <span class="note-symbol">✳</span>
+          <p>
+            I believe every great project starts with curiosity
+            and a willingness to learn.
+          </p>
+        </div>
+      </div>
     </section>
-    <section>
-      <h2>Projects</h2>
-      <div id="projects" class="grid"></div>
+
+    <section class="section skills-section" id="skills">
+      <div class="section-heading">
+        <p class="eyebrow">02 / WHAT I WORK WITH</p>
+        <h2>My toolkit<span class="accent">.</span></h2>
+      </div>
+
+      <div class="skills-list" id="skills-list"></div>
+    </section>
+
+    <section class="section projects-section" id="projects">
+      <div class="section-heading">
+        <p class="eyebrow">03 / SELECTED WORK</p>
+        <h2>Things I've built<span class="accent">.</span></h2>
+      </div>
+
+      <div class="project-grid" id="project-grid"></div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div>
+        <p class="eyebrow">04 / HAVE AN IDEA?</p>
+        <h2>Let's make<br />something <span>great.</span></h2>
+        <p class="contact-description">
+          I'm always open to learning, collaborating, and connecting
+          with people who love building things.
+        </p>
+      </div>
+
+      <div class="contact-links" id="contact-links">
+        <a href="mailto:hello@example.com">Send me an email ↗</a>
+      </div>
     </section>
   </main>
-  <footer id="footer"></footer>
-  <script src="script.js"></script>
-</body>
 
+  <footer class="site-footer" id="footer">
+    <span>© 2026 Adithya R B</span>
+    <span>Made with curiosity & code ✳</span>
+  </footer>
+</body>
 </html>
