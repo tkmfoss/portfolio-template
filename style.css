@@ -347,7 +347,7 @@ section {
 }
 
 /* =============================================================
-   FULL-PAGE SECTION SNAP & PUSH-UP SCROLL TRANSITIONS
+   FULL-PAGE SECTION SNAP & WEIGHTED PUSH-UP SCROLL TRANSITIONS
    ============================================================= */
 
 .scroll-section {
@@ -355,10 +355,11 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 64px 0 48px;
+    padding: 72px 0 52px;
     scroll-snap-align: start;
-    scroll-margin-top: 60px;
+    scroll-margin-top: 50px;
     position: relative;
+    perspective: 1200px;
 }
 
 .hero.scroll-section {
@@ -369,39 +370,40 @@ section {
 
 #projects-section.scroll-section {
     min-height: auto;
-    padding: 76px 0 60px;
+    padding: 84px 0 68px;
     display: block;
 }
 
-/* Progressive enhancement: animated push-up transitions when JS is active */
+/* Progressive enhancement: weighted push-up transitions with mass & momentum */
 html.js-scroll-transitions .scroll-section {
-    opacity: 0.2;
-    transform: translateY(50px) scale(0.985);
-    filter: blur(2px);
+    opacity: 0.08;
+    transform: translateY(80px) scale(0.965) rotateX(2deg);
+    transform-origin: 50% 100%;
+    filter: blur(3px);
     transition: 
-        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 0.75s ease;
+        transform 0.98s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.85s ease;
     will-change: transform, opacity, filter;
 }
 
 html.js-scroll-transitions .scroll-section.is-visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1) rotateX(0deg);
     filter: blur(0);
 }
 
-/* Staggered push-up for headers & elements inside the section */
+/* Staggered weighted push-up for headers & status elements */
 html.js-scroll-transitions .scroll-section .section-header,
 html.js-scroll-transitions .scroll-section .status-pill,
 html.js-scroll-transitions .scroll-section .hero h1,
 html.js-scroll-transitions .scroll-section .hero-role,
 html.js-scroll-transitions .scroll-section .hero-tagline {
-    transform: translateY(20px);
+    transform: translateY(32px);
     opacity: 0;
     transition: 
-        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.08s,
-        opacity 0.55s ease 0.08s;
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.06s,
+        opacity 0.65s ease 0.06s;
 }
 
 html.js-scroll-transitions .scroll-section.is-visible .section-header,
@@ -413,16 +415,17 @@ html.js-scroll-transitions .scroll-section.is-visible .hero-tagline {
     opacity: 1;
 }
 
+/* Heavy mass settling for cards, stats strip, and CTA group */
 html.js-scroll-transitions .scroll-section .about-card,
 html.js-scroll-transitions .scroll-section .skill-category-card,
 html.js-scroll-transitions .scroll-section .contact-card,
 html.js-scroll-transitions .scroll-section .stats-strip,
 html.js-scroll-transitions .scroll-section .cta-group {
-    transform: translateY(28px);
+    transform: translateY(44px);
     opacity: 0;
     transition: 
-        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
-        opacity 0.65s ease 0.15s,
+        transform 0.92s cubic-bezier(0.16, 1, 0.3, 1) 0.14s,
+        opacity 0.75s ease 0.14s,
         box-shadow 0.38s var(--spring-return),
         border-color 0.28s ease,
         background-color 0.28s ease;
@@ -437,77 +440,35 @@ html.js-scroll-transitions .scroll-section.is-visible .cta-group {
     opacity: 1;
 }
 
-/* Stagger project cards push-up */
+/* Weighted stagger for project cards: sequential inertia */
 html.js-scroll-transitions .scroll-section .projects-grid > .spotlight-card {
-    transform: translateY(36px);
+    transform: translateY(52px) scale(0.98);
     opacity: 0;
     transition: 
-        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.7s ease,
+        transform 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.82s ease,
         box-shadow 0.38s var(--spring-return),
         border-color 0.28s ease,
         background-color 0.28s ease;
 }
 
 html.js-scroll-transitions .scroll-section.is-visible .projects-grid > .spotlight-card {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
 }
 
 html.js-scroll-transitions .scroll-section.is-visible .projects-grid > .spotlight-card:nth-child(1) { transition-delay: 0.1s; }
-html.js-scroll-transitions .scroll-section.is-visible .projects-grid > .spotlight-card:nth-child(2) { transition-delay: 0.2s; }
-html.js-scroll-transitions .scroll-section.is-visible .projects-grid > .spotlight-card:nth-child(3) { transition-delay: 0.3s; }
-html.js-scroll-transitions .scroll-section.is-visible .projects-grid > .spotlight-card:nth-child(4) { transition-delay: 0.4s; }
-
-/* Section Scroll Cue / Next Section Prompts */
-.scroll-prompt-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 36px;
-    padding-bottom: 6px;
-}
-
-.section-scroll-cue {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-    color: var(--muted);
-    background: rgba(17, 22, 34, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    padding: 8px 18px;
-    border-radius: var(--radius-pill);
-    text-decoration: none;
-    transition: all 0.25s var(--snappy-ease);
-    cursor: pointer;
-}
-
-.section-scroll-cue:hover {
-    color: #ffffff;
-    border-color: var(--accent);
-    background: rgba(16, 185, 129, 0.12);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(52, 211, 153, 0.22);
-}
-
-.section-scroll-cue .scroll-arrow {
-    animation: bounceDown 2s infinite ease-in-out;
-}
-
-@keyframes bounceDown {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(4px);
-    }
-}
+html.js-scroll-transitions .scroll-section.is-visible .projects-grid > .spotlight-card:nth-child(2) { transition-delay: 0.22s; }
+html.js-scroll-transitions .scroll-section.is-visible .projects-grid > .spotlight-card:nth-child(3) { transition-delay: 0.34s; }
+html.js-scroll-transitions .scroll-section.is-visible .projects-grid > .spotlight-card:nth-child(4) { transition-delay: 0.46s; }
 
 /* Floating Dock Active Indicator */
 .dock-link.active {
+    color: #ffffff;
+    background: rgba(52, 211, 153, 0.14);
+    border: 1px solid rgba(52, 211, 153, 0.35);
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.25);
+}
     color: #ffffff;
     background: rgba(52, 211, 153, 0.14);
     border: 1px solid rgba(52, 211, 153, 0.35);
