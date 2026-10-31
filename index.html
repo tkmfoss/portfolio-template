@@ -97,14 +97,38 @@
         <h2>Featured Projects</h2>
       </div>
       <div id="projects" class="projects-grid">
+        
         <!-- Project 1: AiQI -->
         <div class="spotlight-card">
           <div class="card-inner">
-            <div class="project-meta">
-              <span class="project-category">ML & Environmental Analytics</span>
+            <!-- Architecture Frame with Image Zoom & Reveal -->
+            <div class="project-preview">
+              <svg class="preview-graphic-svg" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="130" fill="#0d0e17"/>
+                <path d="M0 65 Q 100 20, 200 65 T 400 65" stroke="rgba(99,102,241,0.25)" stroke-width="2" fill="none"/>
+                <path d="M0 80 Q 120 120, 240 70 T 400 75" stroke="rgba(16,185,129,0.3)" stroke-width="2" fill="none"/>
+                <!-- Sensor Nodes -->
+                <circle cx="80" cy="52" r="4" fill="#818cf8"/>
+                <circle cx="200" cy="65" r="5" fill="#10b981"/>
+                <circle cx="320" cy="68" r="4" fill="#6366f1"/>
+                <line x1="80" y1="52" x2="200" y2="65" stroke="rgba(255,255,255,0.15)" stroke-dasharray="3 3"/>
+                <line x1="200" y1="65" x2="320" y2="68" stroke="rgba(255,255,255,0.15)" stroke-dasharray="3 3"/>
+                <!-- Metric Badge in Frame -->
+                <rect x="290" y="16" width="94" height="22" rx="4" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)"/>
+                <text x="337" y="31" fill="#818cf8" font-family="JetBrains Mono" font-size="10" text-anchor="middle">ML PIPELINE</text>
+              </svg>
             </div>
+
+            <div class="project-meta">
+              <span class="project-category">
+                <span class="tag-live-dot" aria-hidden="true"></span>
+                <span>ML & Environmental Analytics</span>
+              </span>
+            </div>
+            
             <h3 class="project-title">AiQI</h3>
             <p class="project-desc">Air quality intelligence and risk assessment platform combining machine learning models with a Python Flask backend for real-time pollution metrics and predictive environmental analytics.</p>
+            
             <div class="project-tags">
               <span class="tech-tag">Python</span>
               <span class="tech-tag">Flask</span>
@@ -112,9 +136,10 @@
               <span class="tech-tag">Data Pipelines</span>
               <span class="tech-tag">REST API</span>
             </div>
-            <a href="https://github.com/jobmj/AQI-Risk-Assessment-deployable-repo-" target="_blank" rel="noopener" class="project-link">
+            
+            <a href="https://github.com/jobmj/AQI-Risk-Assessment-deployable-repo-" target="_blank" rel="noopener" class="ghost-btn-link">
               <span>Explore Project</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="7" y1="17" x2="17" y2="7"></line>
                 <polyline points="7 7 17 7 17 17"></polyline>
               </svg>
@@ -125,11 +150,38 @@
         <!-- Project 2: SignLoop -->
         <div class="spotlight-card">
           <div class="card-inner">
-            <div class="project-meta">
-              <span class="project-category">TinyML & Computer Vision</span>
+            <!-- Architecture Frame with Image Zoom & Reveal -->
+            <div class="project-preview">
+              <svg class="preview-graphic-svg" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="130" fill="#0d0e17"/>
+                <!-- Landmark Tracking Mesh -->
+                <circle cx="160" cy="65" r="28" stroke="rgba(99,102,241,0.3)" stroke-width="1.5" stroke-dasharray="4 2"/>
+                <circle cx="160" cy="65" r="4" fill="#6366f1"/>
+                <circle cx="145" cy="45" r="3" fill="#818cf8"/>
+                <circle cx="175" cy="45" r="3" fill="#818cf8"/>
+                <circle cx="135" cy="65" r="3" fill="#818cf8"/>
+                <circle cx="185" cy="65" r="3" fill="#818cf8"/>
+                <line x1="160" y1="65" x2="145" y2="45" stroke="rgba(255,255,255,0.15)"/>
+                <line x1="160" y1="65" x2="175" y2="45" stroke="rgba(255,255,255,0.15)"/>
+                <line x1="160" y1="65" x2="135" y2="65" stroke="rgba(255,255,255,0.15)"/>
+                <line x1="160" y1="65" x2="185" y2="65" stroke="rgba(255,255,255,0.15)"/>
+                <!-- Inference Loop Stream -->
+                <path d="M210 65 L270 65 M260 58 L270 65 L260 72" stroke="rgba(16,185,129,0.5)" stroke-width="2"/>
+                <rect x="290" y="16" width="94" height="22" rx="4" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.3)"/>
+                <text x="337" y="31" fill="#34d399" font-family="JetBrains Mono" font-size="10" text-anchor="middle">EDGE INFERENCE</text>
+              </svg>
             </div>
+
+            <div class="project-meta">
+              <span class="project-category">
+                <span class="tag-live-dot" aria-hidden="true"></span>
+                <span>TinyML & Computer Vision</span>
+              </span>
+            </div>
+            
             <h3 class="project-title">SignLoop</h3>
             <p class="project-desc">Real-time sign language recognition and feedback loop application powered by lightweight TinyML edge models and low-latency computer vision pipelines.</p>
+            
             <div class="project-tags">
               <span class="tech-tag">TinyML</span>
               <span class="tech-tag">Edge AI</span>
@@ -137,9 +189,10 @@
               <span class="tech-tag">Python</span>
               <span class="tech-tag">Real-Time Inference</span>
             </div>
-            <a href="https://github.com/jobmj" target="_blank" rel="noopener" class="project-link">
+            
+            <a href="https://github.com/jobmj" target="_blank" rel="noopener" class="ghost-btn-link">
               <span>Explore Project</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="7" y1="17" x2="17" y2="7"></line>
                 <polyline points="7 7 17 7 17 17"></polyline>
               </svg>
@@ -150,20 +203,42 @@
         <!-- Project 3: Chaos-IDE -->
         <div class="spotlight-card">
           <div class="card-inner">
+            <!-- Architecture Frame with Image Zoom & Reveal -->
+            <div class="project-preview">
+              <svg class="preview-graphic-svg" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="130" fill="#0d0e17"/>
+                <!-- Code Editor Frame -->
+                <rect x="40" y="22" width="320" height="86" rx="6" fill="#13141f" stroke="rgba(255,255,255,0.08)"/>
+                <circle cx="56" cy="34" r="3" fill="#ef4444"/>
+                <circle cx="68" cy="34" r="3" fill="#eab308"/>
+                <circle cx="80" cy="34" r="3" fill="#10b981"/>
+                <!-- Syntax lines -->
+                <rect x="56" y="50" width="70" height="5" rx="2" fill="#818cf8"/>
+                <rect x="135" y="50" width="90" height="5" rx="2" fill="rgba(255,255,255,0.2)"/>
+                <rect x="70" y="65" width="110" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
+                <rect x="70" y="80" width="80" height="5" rx="2" fill="#34d399"/>
+                <rect x="290" y="16" width="94" height="22" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
+                <text x="337" y="31" fill="#9fa6b5" font-family="JetBrains Mono" font-size="10" text-anchor="middle">WEB RUNTIME</text>
+              </svg>
+            </div>
+
             <div class="project-meta">
               <span class="project-category">Developer Tooling & Systems</span>
             </div>
+            
             <h3 class="project-title">Chaos-IDE</h3>
             <p class="project-desc">An interactive, browser-based developer environment engineered for low-latency code execution, syntax parsing, and rapid experimentation.</p>
+            
             <div class="project-tags">
               <span class="tech-tag">JavaScript</span>
               <span class="tech-tag">Web APIs</span>
               <span class="tech-tag">DOM Architecture</span>
               <span class="tech-tag">Tooling</span>
             </div>
-            <a href="https://github.com/jobmj/CHAOS-IDE" target="_blank" rel="noopener" class="project-link">
+            
+            <a href="https://github.com/jobmj/CHAOS-IDE" target="_blank" rel="noopener" class="ghost-btn-link">
               <span>Explore Project</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="7" y1="17" x2="17" y2="7"></line>
                 <polyline points="7 7 17 7 17 17"></polyline>
               </svg>
@@ -174,11 +249,33 @@
         <!-- Project 4: WildBond -->
         <div class="spotlight-card">
           <div class="card-inner">
-            <div class="project-meta">
-              <span class="project-category">Full-Stack & Interaction Design</span>
+            <!-- Architecture Frame with Image Zoom & Reveal -->
+            <div class="project-preview">
+              <svg class="preview-graphic-svg" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="130" fill="#0d0e17"/>
+                <!-- Forest Ecosystem Nodes -->
+                <circle cx="100" cy="65" r="18" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.4)"/>
+                <circle cx="100" cy="65" r="4" fill="#10b981"/>
+                <circle cx="300" cy="65" r="18" fill="rgba(99,102,241,0.12)" stroke="rgba(99,102,241,0.4)"/>
+                <circle cx="300" cy="65" r="4" fill="#6366f1"/>
+                <!-- Matchmaking arc -->
+                <path d="M120 65 C 170 30, 230 30, 280 65" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-dasharray="4 3"/>
+                <circle cx="200" cy="45" r="8" fill="#e8590c" opacity="0.8"/>
+                <rect x="290" y="16" width="94" height="22" rx="4" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.3)"/>
+                <text x="337" y="31" fill="#34d399" font-family="JetBrains Mono" font-size="10" text-anchor="middle">ACTIVE APP</text>
+              </svg>
             </div>
+
+            <div class="project-meta">
+              <span class="project-category">
+                <span class="tag-live-dot" aria-hidden="true"></span>
+                <span>Full-Stack & Interaction Design</span>
+              </span>
+            </div>
+            
             <h3 class="project-title">WildBond</h3>
             <p class="project-desc">A creative web platform reimagining modern social experiences for animal species within a forest ecosystem, pairing algorithmic matchmaking with playful interactive systems.</p>
+            
             <div class="project-tags">
               <span class="tech-tag">JavaScript</span>
               <span class="tech-tag">HTML5</span>
@@ -186,15 +283,17 @@
               <span class="tech-tag">Matchmaking Logic</span>
               <span class="tech-tag">UI/UX</span>
             </div>
-            <a href="https://github.com/jobmj/WildBond" target="_blank" rel="noopener" class="project-link">
+            
+            <a href="https://github.com/jobmj/WildBond" target="_blank" rel="noopener" class="ghost-btn-link">
               <span>Explore Project</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="7" y1="17" x2="17" y2="7"></line>
                 <polyline points="7 7 17 7 17 17"></polyline>
               </svg>
             </a>
           </div>
         </div>
+
       </div>
     </section>
 

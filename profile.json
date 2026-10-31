@@ -36,6 +36,7 @@
         {
             "title": "AiQI",
             "category": "ML & Environmental Analytics",
+            "isLive": true,
             "desc": "Air quality intelligence and risk assessment platform combining machine learning models with a Python Flask backend for real-time pollution metrics and predictive environmental analytics.",
             "tech": ["Python", "Flask", "Machine Learning", "Data Pipelines", "REST API"],
             "link": "https://github.com/jobmj/AQI-Risk-Assessment-deployable-repo-"
@@ -43,6 +44,7 @@
         {
             "title": "SignLoop",
             "category": "TinyML & Computer Vision",
+            "isLive": true,
             "desc": "Real-time sign language recognition and feedback loop application powered by lightweight TinyML edge models and low-latency computer vision pipelines.",
             "tech": ["TinyML", "Edge AI", "Computer Vision", "Python", "Real-Time Inference"],
             "link": "https://github.com/jobmj"
@@ -50,6 +52,7 @@
         {
             "title": "Chaos-IDE",
             "category": "Developer Tooling & Systems",
+            "isLive": false,
             "desc": "An interactive, browser-based developer environment engineered for low-latency code execution, syntax parsing, and rapid experimentation.",
             "tech": ["JavaScript", "Web APIs", "DOM Architecture", "Tooling"],
             "link": "https://github.com/jobmj/CHAOS-IDE"
@@ -57,6 +60,7 @@
         {
             "title": "WildBond",
             "category": "Full-Stack & Interaction Design",
+            "isLive": true,
             "desc": "A creative web platform reimagining modern social experiences for animal species within a forest ecosystem, pairing algorithmic matchmaking with playful interactive systems.",
             "tech": ["JavaScript", "HTML5", "CSS3", "Matchmaking Logic", "UI/UX"],
             "link": "https://github.com/jobmj/WildBond"

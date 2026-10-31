@@ -53,27 +53,42 @@ fetch('profile.json')
             `).join('');
         }
 
-        // Hydrate Projects
+        // Hydrate Projects (with architecture previews, live indicators, and ghost CTA buttons)
         if ($('projects') && Array.isArray(p.projects) && p.projects.length > 0) {
             $('projects').innerHTML = p.projects.map((x) => {
                 const tags = Array.isArray(x.tech)
                     ? x.tech.map((t) => `<span class="tech-tag">${esc(t)}</span>`).join('')
                     : '';
-                const categoryBadge = x.category
-                    ? `<span class="project-category">${esc(x.category)}</span>`
+                const liveDot = x.isLive
+                    ? '<span class="tag-live-dot" aria-hidden="true"></span>'
                     : '';
+                const categoryBadge = x.category
+                    ? `<span class="project-category">${liveDot}<span>${esc(x.category)}</span></span>`
+                    : '';
+                
                 return `
                     <div class="spotlight-card">
                         <div class="card-inner">
+                            <div class="project-preview">
+                                <svg class="preview-graphic-svg" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="400" height="130" fill="#0d0e17"/>
+                                    <path d="M0 65 Q 100 20, 200 65 T 400 65" stroke="rgba(99,102,241,0.25)" stroke-width="2" fill="none"/>
+                                    <circle cx="80" cy="52" r="4" fill="#818cf8"/>
+                                    <circle cx="200" cy="65" r="5" fill="#10b981"/>
+                                    <circle cx="320" cy="68" r="4" fill="#6366f1"/>
+                                    <rect x="290" y="16" width="94" height="22" rx="4" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)"/>
+                                    <text x="337" y="31" fill="#818cf8" font-family="JetBrains Mono" font-size="10" text-anchor="middle">SYSTEM CORE</text>
+                                </svg>
+                            </div>
                             <div class="project-meta">
                                 ${categoryBadge}
                             </div>
                             <h3 class="project-title">${esc(x.title)}</h3>
                             <p class="project-desc">${esc(x.desc)}</p>
                             ${tags ? `<div class="project-tags">${tags}</div>` : ''}
-                            <a href="${safe(x.link)}" target="_blank" rel="noopener" class="project-link">
+                            <a href="${safe(x.link)}" target="_blank" rel="noopener" class="ghost-btn-link">
                                 <span>Explore Project</span>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <line x1="7" y1="17" x2="17" y2="7"></line>
                                     <polyline points="7 7 17 7 17 17"></polyline>
                                 </svg>
@@ -114,7 +129,6 @@ fetch('profile.json')
         }
     })
     .catch((err) => {
-        // If opened locally via file://, pre-rendered semantic HTML remains fully visible
         console.log('Static pre-rendered HTML active. Profile hydration skipped (likely local file:// protocol):', err.message);
     });
 
