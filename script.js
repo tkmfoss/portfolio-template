@@ -276,59 +276,12 @@ function setupSpotlightTracker() {
     });
 }
 
-// Sparkle Fading Glitter Explosion Physics (No circle ring)
+// Sparkle Fading Glitter Explosion Physics (Integrated into Canvas Engine)
 function setupClickRipple() {
-    const glitterColors = [
-        '#c084fc', // Bright Lavender Violet
-        '#a855f7', // Electric Purple
-        '#e879f9', // Neon Fuchsia / Pink Purple
-        '#ffffff', // Diamond Sparkle White
-        '#34d399', // Emerald Starlight
-        '#d8b4fe'  // Soft Lilac Glow
-    ];
-
-    const starGlyphs = ['✦', '★', '✧', '⋆', '✷'];
-
-    window.addEventListener('pointerdown', (e) => {
-        // Sparkle Fading Glitter Burst (10 to 14 radiating particles)
-        const particleCount = Math.floor(Math.random() * 5) + 10;
-
-        for (let i = 0; i < particleCount; i++) {
-            const angle = (Math.PI * 2 * i) / particleCount + ((Math.random() - 0.5) * 0.4);
-            const distance = Math.floor(Math.random() * 55) + 30; // 30px to 85px outward
-            const gx = Math.cos(angle) * distance;
-            const gy = Math.sin(angle) * distance;
-            const rot = (Math.random() - 0.5) * 360;
-            const color = glitterColors[Math.floor(Math.random() * glitterColors.length)];
-            const duration = (Math.random() * 0.25 + 0.6).toFixed(2); // 0.6s to 0.85s
-
-            const isStar = Math.random() > 0.4;
-            const p = document.createElement('div');
-
-            if (isStar) {
-                p.className = 'glitter-particle';
-                p.textContent = starGlyphs[Math.floor(Math.random() * starGlyphs.length)];
-                p.style.setProperty('--glitter-size', `${Math.floor(Math.random() * 7) + 10}px`);
-            } else {
-                p.className = 'glitter-dot';
-                p.style.setProperty('--dot-size', `${Math.floor(Math.random() * 5) + 4}px`);
-            }
-
-            p.style.left = `${e.clientX}px`;
-            p.style.top = `${e.clientY}px`;
-            p.style.setProperty('--gx', `${gx}px`);
-            p.style.setProperty('--gy', `${gy}px`);
-            p.style.setProperty('--grot', `${rot}deg`);
-            p.style.setProperty('--glitter-color', color);
-            p.style.setProperty('--glitter-duration', `${duration}s`);
-
-            document.body.appendChild(p);
-            setTimeout(() => p.remove(), parseFloat(duration) * 1000 + 50);
-        }
-    });
+    // Sparkles and mouse trails are rendered in the unified high-performance canvas engine below.
 }
 
-// Continuous Glowing Purple Mouse Trail Canvas
+// Continuous Glowing Purple Mouse Trail & Fluid Canvas Sparkles
 function setupMagicalTrail() {
     const canvas = document.getElementById('mouse-trail-canvas');
     if (!canvas) return;
@@ -346,8 +299,42 @@ function setupMagicalTrail() {
     window.addEventListener('resize', resize, { passive: true });
 
     const points = [];
+    const sparkles = [];
     const TRAIL_DURATION = 500; // Trail lifetime in milliseconds
 
+    // Color palette: glowing lavender, electric purple, fuchsia, white diamond, signal emerald
+    const sparkleColors = [
+        '#ffffff', // Diamond White Core
+        '#f5d0fe', // Soft Crystal Lilac
+        '#e879f9', // Neon Fuchsia / Pink
+        '#c084fc', // Bright Lavender
+        '#a855f7', // Electric Purple
+        '#818cf8', // Indigo Sparkle
+        '#34d399'  // Signal Emerald
+    ];
+
+    // Mathematical 4-pointed curved star (iconic ✦ diamond sparkle)
+    function drawSparkleStar(c, r) {
+        c.beginPath();
+        c.moveTo(0, -r);
+        c.quadraticCurveTo(0, 0, r, 0);
+        c.quadraticCurveTo(0, 0, 0, r);
+        c.quadraticCurveTo(0, 0, -r, 0);
+        c.quadraticCurveTo(0, 0, 0, -r);
+        c.closePath();
+        c.fill();
+    }
+
+    // 8-pointed star (adds cross rays for prominent sparkles)
+    function drawStarlight(c, r) {
+        drawSparkleStar(c, r);
+        c.save();
+        c.rotate(Math.PI / 4);
+        drawSparkleStar(c, r * 0.55);
+        c.restore();
+    }
+
+    // Track mouse movement for the continuous purple line
     window.addEventListener('pointermove', (e) => {
         const now = performance.now();
         const last = points[points.length - 1];
@@ -360,14 +347,54 @@ function setupMagicalTrail() {
         }
     }, { passive: true });
 
+    // Smooth Newtonian Particle Burst on click (Sparkles only, no circle ring)
+    window.addEventListener('pointerdown', (e) => {
+        if (e.button && e.button !== 0) return; // Only primary clicks
+
+        const count = Math.floor(Math.random() * 5) + 14; // 14 to 18 radiating sparkles
+        for (let i = 0; i < count; i++) {
+            // Radiate evenly in all directions with slight random jitter
+            const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.45;
+            const speed = Math.random() * 3.6 + 2.0; // Initial burst velocity (px/frame)
+            const roll = Math.random();
+            let type = 'star';
+            let size = Math.random() * 4.5 + 6.5; // 6.5px to 11px radius
+
+            if (roll < 0.35) {
+                type = 'dot';
+                size = Math.random() * 2 + 2.2; // 2.2px to 4.2px radius
+            } else if (roll > 0.8) {
+                type = 'starlight';
+                size = Math.random() * 4 + 7.5;
+            }
+
+            sparkles.push({
+                x: e.clientX,
+                y: e.clientY,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                friction: 0.932, // Buttery smooth exponential drag
+                gravity: 0.065,  // Gentle buoyant downward drift
+                rot: Math.random() * Math.PI * 2,
+                vrot: (Math.random() - 0.5) * 0.08,
+                alpha: 1.0,
+                decay: Math.random() * 0.012 + 0.016, // Gradual fade (~0.8s to 1.1s)
+                color: sparkleColors[Math.floor(Math.random() * sparkleColors.length)],
+                type,
+                size
+            });
+        }
+    }, { passive: true });
+
     function render(now) {
-        // Prune points that have exceeded lifetime
+        // Prune mouse trail points older than TRAIL_DURATION
         while (points.length > 0 && now - points[0].time > TRAIL_DURATION) {
             points.shift();
         }
 
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
+        // Render continuous glowing purple mouse trail line
         if (points.length >= 2) {
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
@@ -400,6 +427,50 @@ function setupMagicalTrail() {
                 ctx.strokeStyle = `rgba(243, 232, 255, ${alpha * 0.95})`;
                 ctx.lineWidth = baseWidth;
                 ctx.stroke();
+            }
+        }
+
+        // Render & simulate active click sparkles with fluid Newtonian physics
+        if (sparkles.length > 0) {
+            for (let i = sparkles.length - 1; i >= 0; i--) {
+                const sp = sparkles[i];
+
+                sp.x += sp.vx;
+                sp.y += sp.vy;
+                sp.vx *= sp.friction;
+                sp.vy *= sp.friction;
+                sp.vy += sp.gravity;
+                sp.rot += sp.vrot;
+                sp.alpha -= sp.decay;
+
+                if (sp.alpha <= 0) {
+                    sparkles.splice(i, 1);
+                    continue;
+                }
+
+                const currentAlpha = Math.max(0, Math.min(1, sp.alpha));
+                const scale = Math.min(1, currentAlpha * 1.4);
+                const r = sp.size * scale;
+
+                ctx.save();
+                ctx.translate(sp.x, sp.y);
+                ctx.rotate(sp.rot);
+                ctx.globalAlpha = currentAlpha;
+                ctx.fillStyle = sp.color;
+                ctx.shadowColor = sp.color;
+                ctx.shadowBlur = (sp.type === 'dot' ? 8 : 12) * currentAlpha;
+
+                if (sp.type === 'star') {
+                    drawSparkleStar(ctx, r);
+                } else if (sp.type === 'starlight') {
+                    drawStarlight(ctx, r);
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.restore();
             }
         }
 
