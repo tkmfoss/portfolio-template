@@ -337,28 +337,33 @@ function closeModal() {
     document.body.classList.remove('modal-open');
 }
 
-// Full-Page Section Snap & Push-Up Scroll Transitions with Dock Spy
+// Full-Page Section Snap & Bidirectional Weighted Push-Up Scroll Transitions
 function setupScrollTransitions() {
     document.documentElement.classList.add('js-scroll-transitions');
 
     const sections = document.querySelectorAll('.scroll-section');
     const dockLinks = document.querySelectorAll('.dock-link');
+    const hero = document.getElementById('hero');
 
     if (!('IntersectionObserver' in window)) {
         sections.forEach((s) => s.classList.add('is-visible'));
         return;
     }
 
+    // Symmetric focal zone so push-up triggers identically when scrolling DOWN and UP
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
+            const rect = entry.boundingClientRect;
+            const target = entry.target;
+            const targetId = target.id;
 
-                const targetId = entry.target.id;
+            if (entry.isIntersecting) {
+                target.classList.add('is-visible');
+
                 if (targetId) {
                     dockLinks.forEach((link) => {
                         const href = link.getAttribute('href');
-                        if (href === `#${targetId}`) {
+                        if (href === `#${targetId}` && targetId !== 'hero') {
                             link.classList.add('active');
                         } else {
                             link.classList.remove('active');
@@ -366,23 +371,29 @@ function setupScrollTransitions() {
                     });
                 }
             } else {
-                // If section scrolled substantially out of viewport, reset so it pushes up again
-                const rect = entry.target.getBoundingClientRect();
-                if (rect.top > window.innerHeight * 0.95 || rect.bottom < -50) {
-                    entry.target.classList.remove('is-visible');
+                // Reset when section scrolls out of the active focal region in either direction
+                // (Scrolled down past section OR scrolled up above section)
+                if (rect.top > window.innerHeight * 0.9 || rect.bottom < window.innerHeight * 0.05) {
+                    target.classList.remove('is-visible');
                 }
             }
         });
     }, {
-        threshold: [0.12, 0.25],
-        rootMargin: '0px 0px -6% 0px'
+        threshold: [0.15, 0.3],
+        rootMargin: '-8% 0px -8% 0px'
     });
 
     sections.forEach((sec) => observer.observe(sec));
 
-    // Ensure hero is visible on initial load
-    const hero = document.getElementById('hero');
+    // Ensure hero triggers weighted push-up on load and when scrolled to the very top
     if (hero) {
         hero.classList.add('is-visible');
     }
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY < 60 && hero && !hero.classList.contains('is-visible')) {
+            hero.classList.add('is-visible');
+            dockLinks.forEach((l) => l.classList.remove('active'));
+        }
+    }, { passive: true });
 }
