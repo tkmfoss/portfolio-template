@@ -1,19 +1,32 @@
+
 {
-    "name": "Your Name",
-    "tagline": "Your one-line introduction",
-    "bio": "Write 2 or 3 sentences about yourself.",
-    "skills": [
-        "Git",
-        "HTML"
-    ],
-    "projects": [
-        {
-            "title": "My first project",
-            "desc": "What it does.",
-            "link": "https://github.com/yourname"
-        }
-    ],
-    "links": {
-        "github": "https://github.com/yourname"
+  "name": "Adithya R B",
+  "tagline": "Aspiring Software Developer",
+  "description": "Computer Engineering Student | Exploring Ideas Through Code",
+  "bio": "I'm a second-year Computer Engineering student with a growing interest in software development and game development. I enjoy exploring ideas, solving problems, and building interactive experiences. My current project, Era Escape, is a Java Swing puzzle game that brings logic and creativity together. I'm always learning and looking forward to building more projects.",
+  "skills": [
+    "Java",
+    "Java Swing",
+    "Object-Oriented Programming",
+    "Git",
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
+  "links": {
+    "github": "https://github.com/Adithya-rb-here",
+    "linkedin": "https://www.linkedin.com/in/adithya-r-b-66860737a/"
+  },
+  "projects": [
+    {
+      "name": "Era Escape",
+      "description": "A Java Swing escape-room puzzle game where players solve logic challenges, explore different levels, use hints, and race against a timer. The game features an Ancient Greece-themed Level 7 and a shared global lives system.",
+      "technologies": [
+        "Java",
+        "Java Swing",
+        "OOP"
+      ],
+      "link": "https://github.com/Adithya-rb-here"
     }
+  ]
 }
