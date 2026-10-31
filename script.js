@@ -5,6 +5,8 @@ const safe = (u) => (/^(https?:\/\/|mailto:)/i.test(u) ? u : '#');
 
 // Initialize spotlight & 3D tilt tracking immediately
 setupSpotlightTracker();
+setupModalController();
+setupClickRipple();
 
 // Hook up Email Copy button immediately
 const copyBtn = $('copy-email-btn');
@@ -53,7 +55,7 @@ fetch('profile.json')
             `).join('');
         }
 
-        // Hydrate Projects (with architecture previews, cover screenshots, video overlays, and 3D physics)
+        // Hydrate Projects (with architecture previews, cover screenshots, video overlays, and Dynamic Island expansion)
         if ($('projects') && Array.isArray(p.projects) && p.projects.length > 0) {
             $('projects').innerHTML = p.projects.map((x) => {
                 const tags = Array.isArray(x.tech)
@@ -145,18 +147,18 @@ fetch('profile.json')
                 ` : '');
 
                 return `
-                    <div class="spotlight-card">
+                    <div class="spotlight-card" tabindex="0" role="button" aria-haspopup="dialog" title="Click to view centered case study">
                         <div class="card-inner">
                             <div class="project-preview">
                                 ${x.image ? `<img class="preview-img" src="${esc(x.image)}" alt="${esc(x.title)} Cover" loading="lazy" onerror="this.style.display='none'">` : ''}
                                 <svg class="preview-graphic-svg" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect width="400" height="130" fill="#0d0e17"/>
-                                    <path d="M0 65 Q 100 20, 200 65 T 400 65" stroke="rgba(99,102,241,0.25)" stroke-width="2" fill="none"/>
-                                    <circle cx="80" cy="52" r="4" fill="#818cf8"/>
+                                    <path d="M0 65 Q 100 20, 200 65 T 400 65" stroke="rgba(52,211,153,0.25)" stroke-width="2" fill="none"/>
+                                    <circle cx="80" cy="52" r="4" fill="#34d399"/>
                                     <circle cx="200" cy="65" r="5" fill="#10b981"/>
                                     <circle cx="320" cy="68" r="4" fill="#6366f1"/>
-                                    <rect x="270" y="16" width="116" height="22" rx="4" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)"/>
-                                    <text x="328" y="31" fill="#818cf8" font-family="JetBrains Mono" font-size="10" text-anchor="middle">SYSTEM CORE</text>
+                                    <rect x="270" y="16" width="116" height="22" rx="4" fill="rgba(16,185,129,0.15)" stroke="rgba(52,211,153,0.3)"/>
+                                    <text x="328" y="31" fill="#34d399" font-family="JetBrains Mono" font-size="10" text-anchor="middle">SYSTEM CORE</text>
                                 </svg>
                                 ${videoOverlay}
                             </div>
@@ -176,7 +178,7 @@ fetch('profile.json')
                 `;
             }).join('');
 
-            // Re-bind 3D tilt tracking for hydrated cards
+            // Re-bind 3D tilt tracking and modal clicks for hydrated cards
             setupSpotlightTracker();
         }
 
@@ -220,7 +222,6 @@ function setupSpotlightTracker() {
     );
     
     cards.forEach((card) => {
-        // Prevent stacking listeners
         if (card.dataset.tiltInitialized) return;
         card.dataset.tiltInitialized = 'true';
 
@@ -229,11 +230,9 @@ function setupSpotlightTracker() {
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
-            // Set coordinates for radial cursor spotlight
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
 
-            // 3D Tilt calculation & Dynamic Island Spring Pop
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             const rotateX = ((y - centerY) / centerY) * -5;
@@ -243,10 +242,96 @@ function setupSpotlightTracker() {
         });
 
         card.addEventListener('mouseleave', () => {
-            // Smoothly retract with spring physics (Dynamic Island pop-out)
             card.style.transform = '';
             card.style.setProperty('--mouse-x', '-200px');
             card.style.setProperty('--mouse-y', '-200px');
         });
+
+        // Click on project card pops up modal in the center of the screen
+        if (card.classList.contains('spotlight-card')) {
+            card.addEventListener('click', (e) => {
+                // If user clicked directly on an outbound action link, do not hijack
+                if (e.target.closest('a, button')) return;
+                openProjectModal(card);
+            });
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    if (e.target.closest('a, button')) return;
+                    e.preventDefault();
+                    openProjectModal(card);
+                }
+            });
+        }
     });
+}
+
+// Phosphor Tactile Click Ripple Physics
+function setupClickRipple() {
+    window.addEventListener('click', (e) => {
+        const ripple = document.createElement('div');
+        ripple.className = 'click-ripple';
+        ripple.style.left = `${e.clientX}px`;
+        ripple.style.top = `${e.clientY}px`;
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 450);
+    });
+}
+
+// Centered Case Study Modal Controller
+function setupModalController() {
+    const modal = $('project-modal');
+    const modalCloseBtn = $('modal-close-btn');
+
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeModal);
+    }
+
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
+            closeModal();
+        }
+    });
+}
+
+function openProjectModal(card) {
+    const modal = $('project-modal');
+    const modalBody = $('modal-body');
+    if (!modal || !modalBody) return;
+
+    const cardInner = card.querySelector('.card-inner');
+    if (!cardInner) return;
+
+    // Clone card inner structure for the centered modal
+    const clone = cardInner.cloneNode(true);
+
+    // Expand the deepdive box in the modal unconditionally
+    const deepdive = clone.querySelector('.project-deepdive');
+    if (deepdive) {
+        deepdive.style.gridTemplateRows = '1fr';
+        deepdive.style.opacity = '1';
+        deepdive.style.marginBottom = '20px';
+    }
+    const expandPrompt = clone.querySelector('.expand-prompt');
+    if (expandPrompt) expandPrompt.style.display = 'none';
+
+    modalBody.innerHTML = '';
+    modalBody.appendChild(clone);
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+}
+
+function closeModal() {
+    const modal = $('project-modal');
+    if (!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
 }
