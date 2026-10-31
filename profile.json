@@ -46,7 +46,7 @@
             "architecture": "3-tier distributed system: JavaFX 21 reactive desktop GUI, Spring Boot 3 core hub with Indian CPCB sub-index formulas & Supabase PostgreSQL, and Python Flask microservice serving XGBoost/LightGBM next-hour forecast ensembles with SHAP diagnostics.",
             "desc": "AI-based real-time air quality risk assessment and personalized clinical health advisory platform. Computes Indian CPCB multi-pollutant indices, predicts next-hour pollution levels with ML ensembles, and cross-references patient vulnerability markers.",
             "tech": ["Java 21", "Spring Boot 3", "Python Flask", "JavaFX 21", "PostgreSQL", "XGBoost", "LightGBM", "CPCB Standard", "Apache PDFBox"],
-            "link": "https://github.com/jobmj/AQI-Risk-Assessment-deployable-repo-",
+            "link": "https://github.com/mohamedfahadlal/AiQI",
             "demoLink": "https://drive.google.com/file/d/1ZO3AGvXY89lYv9qqPFGj_tmRt7o1uQ4q/view?usp=sharing"
         },
         {
