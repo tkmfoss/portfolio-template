@@ -7,6 +7,7 @@ const safe = (u) => (/^(https?:\/\/|mailto:)/i.test(u) ? u : '#');
 setupSpotlightTracker();
 setupModalController();
 setupClickRipple();
+setupScrollTransitions();
 
 // Hook up Email Copy button immediately
 const copyBtn = $('copy-email-btn');
@@ -334,4 +335,54 @@ function closeModal() {
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');
+}
+
+// Full-Page Section Snap & Push-Up Scroll Transitions with Dock Spy
+function setupScrollTransitions() {
+    document.documentElement.classList.add('js-scroll-transitions');
+
+    const sections = document.querySelectorAll('.scroll-section');
+    const dockLinks = document.querySelectorAll('.dock-link');
+
+    if (!('IntersectionObserver' in window)) {
+        sections.forEach((s) => s.classList.add('is-visible'));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+
+                const targetId = entry.target.id;
+                if (targetId) {
+                    dockLinks.forEach((link) => {
+                        const href = link.getAttribute('href');
+                        if (href === `#${targetId}`) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            } else {
+                // If section scrolled substantially out of viewport, reset so it pushes up again
+                const rect = entry.target.getBoundingClientRect();
+                if (rect.top > window.innerHeight * 0.95 || rect.bottom < -50) {
+                    entry.target.classList.remove('is-visible');
+                }
+            }
+        });
+    }, {
+        threshold: [0.12, 0.25],
+        rootMargin: '0px 0px -6% 0px'
+    });
+
+    sections.forEach((sec) => observer.observe(sec));
+
+    // Ensure hero is visible on initial load
+    const hero = document.getElementById('hero');
+    if (hero) {
+        hero.classList.add('is-visible');
+    }
 }
