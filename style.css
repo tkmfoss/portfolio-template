@@ -583,6 +583,12 @@ h2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 22px;
+    align-items: start;
+}
+
+.projects-grid > .spotlight-card {
+    align-self: start;
+    height: fit-content;
 }
 
 .project-meta {
