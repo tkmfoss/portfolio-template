@@ -58,7 +58,7 @@ fetch('profile.json')
 
         // Hydrate Projects (with architecture previews, cover screenshots, video overlays, and Dynamic Island expansion)
         if ($('projects') && Array.isArray(p.projects) && p.projects.length > 0) {
-            $('projects').innerHTML = p.projects.map((x) => {
+            $('projects').innerHTML = p.projects.map((x, idx) => {
                 const tags = Array.isArray(x.tech)
                     ? x.tech.map((t) => `<span class="tech-tag">${esc(t)}</span>`).join('')
                     : '';
@@ -148,7 +148,7 @@ fetch('profile.json')
                 ` : '');
 
                 return `
-                    <div class="spotlight-card" tabindex="0" role="button" aria-haspopup="dialog" title="Click to view centered case study">
+                    <div class="spotlight-card ${idx === 0 ? 'featured-card' : ''}" tabindex="0" role="button" aria-haspopup="dialog" title="Click to view centered case study">
                         <div class="card-inner">
                             <div class="project-preview">
                                 ${x.image ? `<img class="preview-img" src="${esc(x.image)}" alt="${esc(x.title)} Cover" loading="lazy" onerror="this.style.display='none'">` : ''}

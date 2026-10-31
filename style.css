@@ -6,35 +6,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-    --bg: #0a0d14; /* Deep Carbon Navy */
+    --bg: #0a0d14; /* Deep Carbon Navy / Black */
     --bg-alt: #0e121b;
-    /* Surface: Tinted Glass Slate at 68% opacity with blur */
-    --card: rgba(17, 22, 34, 0.68);
+    --card: rgba(17, 22, 34, 0.75); /* Tinted Glass Slate */
     --card-hover: rgba(22, 30, 48, 0.90);
-    --border: rgba(255, 255, 255, 0.08); /* Subdued Phosphor */
-    --border-hover: rgba(52, 211, 153, 0.35); /* Signal Emerald Phosphor */
-    --border-accent: rgba(52, 211, 153, 0.45);
-    --fg: #f1f5f9; /* Stark Ice */
-    --muted: #94a3b8; /* Cool Machine Silver */
+    --border: rgba(255, 255, 255, 0.08); /* Card Borders (Default) */
+    --border-hover: rgba(52, 211, 153, 0.40); /* Card Borders (Hover): Signal Emerald glow */
+    --border-accent: rgba(52, 211, 153, 0.40);
+    --fg: #f1f5f9; /* Stark Ice White */
+    --muted: #94a3b8; /* Machine Silver Gray */
     --subtle: #64748b;
-    --accent: #10b981; /* Clean Signal Emerald */
+    --accent: #10b981; /* Signal Emerald Green */
     --accent-light: #34d399; /* Signal Emerald Bright */
-    --accent-glow: rgba(16, 185, 129, 0.22);
-    --secondary-accent: #6366f1; /* Cobalt Violet */
+    --accent-glow: rgba(16, 185, 129, 0.25);
+    --secondary-accent: #6366f1; /* Cobalt Violet / Indigo */
     --secondary-glow: rgba(99, 102, 241, 0.20);
     --emerald: #10b981;
     --emerald-glow: rgba(16, 185, 129, 0.35);
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-mono: ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace;
     --radius-sm: 8px;
     --radius-md: 16px;
     --radius-lg: 24px;
     --radius-pill: 9999px;
     --snappy-ease: cubic-bezier(0.16, 1, 0.3, 1);
-    /* Dynamic Island Spring Physics: organic overshoot pop-up & clean spring retraction */
     --spring-pop: cubic-bezier(0.34, 1.45, 0.7, 1);
     --spring-return: cubic-bezier(0.22, 1, 0.36, 1);
-    --transition: all 0.24s var(--snappy-ease);
+    --transition: all 0.28s var(--snappy-ease);
 }
 
 /* Light mode fallback if system prefers light */
@@ -86,19 +84,71 @@ body {
     background-attachment: fixed;
 }
 
-/* Ambient Radial Glow on Top */
+/* Top-fixed Pure CSS Scroll Reading Progress Bar */
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--secondary-accent));
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    z-index: 1000;
+    animation: scrollProgress auto linear;
+    animation-timeline: scroll();
+}
+
+@keyframes scrollProgress {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* Engineering Dot-Matrix Blueprint Background with Radial Vignette */
+.bg-grid-blueprint {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 25%, transparent 82%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 25%, transparent 82%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Subtle Floating Ambient Radial Blur Glow Orb */
 .ambient-glow {
-    position: absolute;
-    top: -140px;
+    position: fixed;
+    top: -160px;
     left: 50%;
     transform: translateX(-50%);
     width: 950px;
-    max-width: 100vw;
-    height: 500px;
-    background: radial-gradient(circle, var(--accent-glow) 0%, rgba(99, 102, 241, 0.04) 55%, transparent 75%);
+    max-width: 120vw;
+    height: 520px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, rgba(99, 102, 241, 0.10) 45%, transparent 75%);
     pointer-events: none;
     z-index: 0;
-    filter: blur(50px);
+    filter: blur(70px);
+    animation: ambientOrbFloat 18s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+@keyframes ambientOrbFloat {
+    0% {
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+    50% {
+        transform: translateX(-47%) translateY(45px) scale(1.12);
+    }
+    100% {
+        transform: translateX(-53%) translateY(-20px) scale(0.96);
+    }
 }
 
 /* Floating Navigation Dock */
@@ -135,14 +185,38 @@ body {
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 500;
-    padding: 6px 12px;
+    padding: 6px 14px;
     border-radius: var(--radius-pill);
-    transition: var(--transition);
+    position: relative;
+    transition: color 0.25s var(--snappy-ease);
+}
+
+.dock-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-light);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.8);
+    transition: width 0.28s var(--snappy-ease), left 0.28s var(--snappy-ease);
 }
 
 .dock-link:hover {
     color: var(--fg);
-    background: rgba(255, 255, 255, 0.06);
+}
+
+.dock-link:hover::after,
+.dock-link.active::after {
+    left: 14%;
+    width: 72%;
+}
+
+.dock-link.active {
+    color: #ffffff;
+    background: rgba(52, 211, 153, 0.12);
 }
 
 .dock-divider {
@@ -262,6 +336,8 @@ main, .hero, footer {
 }
 
 .btn {
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -274,6 +350,42 @@ main, .hero, footer {
     cursor: pointer;
     transition: var(--transition);
     border: 1px solid transparent;
+}
+
+/* Pure CSS Shimmer Sweep Effect across button surface */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -130%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.22),
+        transparent
+    );
+    transform: skewX(-20deg);
+    pointer-events: none;
+}
+
+.btn:hover::after {
+    left: 200%;
+    transition: left 0.75s var(--snappy-ease);
+}
+
+.btn svg,
+.ghost-btn-link .link-arrow,
+.contact-links .btn svg {
+    transition: transform 0.25s var(--snappy-ease);
+}
+
+.btn:hover svg,
+.ghost-btn-link:hover .link-arrow,
+.spotlight-card:hover .link-arrow,
+.contact-links .btn:hover svg {
+    transform: translate(3px, -3px);
 }
 
 .btn-primary {
@@ -507,28 +619,26 @@ h2 {
 .stats-strip {
     position: relative;
     background: var(--card);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-radius: var(--radius-md);
     overflow: hidden;
-    /* Dual-layer light reflection: 1px border brighter at top-left + refined inner vignette */
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    /* Frosted glass 1px border & refined inner vignette top reflection */
+    border: 1px solid var(--border);
     box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.12),
-        inset 1px 0 0 rgba(255, 255, 255, 0.04),
-        inset 0 0 24px rgba(255, 255, 255, 0.012),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
         0 12px 32px -4px rgba(0, 0, 0, 0.45);
-    /* Dynamic Island 3D tilt perspective & spring return physics */
+    /* 3D tilt perspective & snappy elevation lift */
     transform-style: preserve-3d;
     will-change: transform, box-shadow, border-color;
     transition: 
-        transform 0.38s var(--spring-return), 
-        box-shadow 0.38s var(--spring-return), 
-        border-color 0.28s ease,
-        background-color 0.28s ease;
+        transform 0.38s var(--snappy-ease), 
+        box-shadow 0.38s var(--snappy-ease), 
+        border-color 0.28s var(--snappy-ease),
+        background-color 0.28s var(--snappy-ease);
 }
 
-/* Dynamic Island Pop-Up & Diffused Directional Accent Glow on Hover */
+/* Smooth Hover Elevation Lift, Sharp Border Brightening & Outer Accent Shadow */
 .spotlight-card:hover,
 .about-card:hover,
 .skill-category-card:hover,
@@ -536,18 +646,59 @@ h2 {
 .stats-strip:hover {
     z-index: 15;
     background-color: var(--card-hover);
-    border-color: var(--border-accent);
+    border-color: var(--border-hover);
+    transform: translateY(-6px);
     box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.25),
-        inset 0 0 20px rgba(52, 211, 153, 0.08),
-        0 26px 52px -10px rgba(0, 0, 0, 0.75),
-        0 0 32px -4px rgba(52, 211, 153, 0.32);
+        inset 0 1px 0 rgba(255, 255, 255, 0.20),
+        0 20px 42px -8px rgba(0, 0, 0, 0.70),
+        0 0 24px -2px rgba(52, 211, 153, 0.30);
     transition: 
         transform 0.08s ease-out, 
-        box-shadow 0.38s var(--spring-pop), 
-        border-color 0.28s ease,
-        background-color 0.28s ease !important;
+        box-shadow 0.38s var(--snappy-ease), 
+        border-color 0.28s var(--snappy-ease),
+        background-color 0.28s var(--snappy-ease) !important;
     transition-delay: 0s !important;
+}
+
+/* =============================================================
+   FEATURED CARD ROTATING BORDER BEAM (Pure CSS)
+   ============================================================= */
+
+@property --beam-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.featured-card {
+    position: relative;
+}
+
+.featured-card::before {
+    content: '';
+    position: absolute;
+    inset: -1.5px;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+        from var(--beam-angle),
+        transparent 65%,
+        rgba(52, 211, 153, 0.85) 85%,
+        rgba(99, 102, 241, 0.95) 95%,
+        transparent 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rotateBorderBeam 6s linear infinite;
+    pointer-events: none;
+    z-index: 3;
+}
+
+@keyframes rotateBorderBeam {
+    to {
+        --beam-angle: 360deg;
+    }
 }
 
 /* Dynamic Radial Mouse Spotlight across ALL cards */
@@ -741,23 +892,27 @@ h2 {
 
 /* Live Status Indicator next to active deployment */
 .tag-live-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background-color: var(--emerald);
-    box-shadow: 0 0 6px var(--emerald);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.75);
     display: inline-block;
-    animation: livePulse 2s infinite ease-in-out;
+    animation: livePulse 2.2s var(--snappy-ease) infinite;
 }
 
 @keyframes livePulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.75);
     }
-    50% {
-        opacity: 0.4;
-        transform: scale(0.85);
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
     }
 }
 
@@ -908,14 +1063,14 @@ h2 {
 
 .tech-tag {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     letter-spacing: -0.01em;
     color: var(--muted);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.10);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    padding: 3px 9px;
-    border-radius: var(--radius-pill);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -931,10 +1086,10 @@ h2 {
 /* Staggered Hover Micro-Lift & Color-Shift toward Accent */
 .tech-tag:hover {
     transform: translateY(-2px);
-    color: var(--accent-light);
-    border-color: rgba(52, 211, 153, 0.45);
+    color: #ffffff;
+    border-color: var(--border-hover);
     background-color: rgba(16, 185, 129, 0.12);
-    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.20);
 }
 
 /* =============================================================
@@ -951,7 +1106,7 @@ h2 {
     font-size: 0.86rem;
     font-weight: 500;
     background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.10);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
     padding: 8px 14px;
     border-radius: var(--radius-sm);
@@ -961,7 +1116,7 @@ h2 {
 
 .ghost-btn-link:hover, .ghost-btn-link:focus-within {
     background: rgba(16, 185, 129, 0.14);
-    border-color: rgba(52, 211, 153, 0.5);
+    border-color: var(--border-hover);
     color: #ffffff;
     box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
     outline: none;
@@ -972,7 +1127,9 @@ h2 {
     transition: transform 0.22s var(--snappy-ease);
 }
 
-.ghost-btn-link:hover .link-arrow, .ghost-btn-link:focus-visible .link-arrow {
+.ghost-btn-link:hover .link-arrow, 
+.ghost-btn-link:focus-visible .link-arrow,
+.spotlight-card:hover .link-arrow {
     transform: translate(3px, -3px);
 }
 
@@ -1006,13 +1163,28 @@ h2 {
 
 .chips li {
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border);
+    font-size: 0.76rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.10);
     padding: 5px 12px;
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-sm);
     color: var(--muted);
-    transition: var(--transition);
+    transition: 
+        transform 0.2s var(--snappy-ease), 
+        color 0.2s ease, 
+        border-color 0.2s ease, 
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+    cursor: default;
+}
+
+.chips li:hover {
+    transform: translateY(-2px);
+    color: #ffffff;
+    border-color: var(--border-hover);
+    background: rgba(16, 185, 129, 0.12);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.20);
+}
 }
 
 .chips li:hover {
